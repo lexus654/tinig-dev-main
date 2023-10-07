@@ -1,0 +1,9 @@
+1. Setup the Pages 
+Develop the product page 
+develop the Account page 
+Develop the Home Page 
+
+
+Style Guide 
+DCE6FF
+Margin 100 for LEFT AND RIGHT

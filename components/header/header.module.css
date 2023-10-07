@@ -1,0 +1,33 @@
+.headerContainer {
+  background-color: #dce6ff;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.HeaderLeft,
+.HeaderNav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.HeaderNav {
+  margin-left: 50px;
+}
+.HeaderNav li {
+  list-style-type: none;
+  margin: 0 20px;
+  cursor: pointer;
+  font-size: 30px;
+  font-family: "Nunito", sans-serif;
+}
+.HeaderNav li a {
+  color: black;
+}
+
+.HeaderRight img:nth-child(1) {
+  margin-right: 30px;
+}
