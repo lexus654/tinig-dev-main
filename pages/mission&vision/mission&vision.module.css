@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  /* justify-content: center; */
+  align-items: start;
+}
+.banner {
+  height: 620px;
+  width: auto;
+}
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+}
+.topPart {
+  background-image: url("../../assets/missionText.png");
+  width: 920px;
+  height: 160px;
+  position: absolute;
+  right: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.topPart {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 130.9%;
+  color: #000000;
+}
+.topPart span {
+  font-weight: 700;
+}
+.botPart {
+  display: flex;
+  margin-top: 240px;
+  margin-left: 150px;
+}
+
+.mission {
+  margin-bottom: 170px;
+}
+.missionText {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 108.3%;
+  letter-spacing: -0.01em;
+  color: #000000;
+}
+.botPartTwo .mission,
+.botPartTwo .vision {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 130.9%;
+  color: #000000;
+}
+.botPartTwo .vision {
+  margin-top: -65px;
+}
+.timeline {
+  margin-top: -80px;
+  height: auto;
+  width: 80px;
+}

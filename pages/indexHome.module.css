@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.insideContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 40px;
+}
+.bannerWidth {
+  width: 474px;
+  height: auto;
+}
+.leftContainer {
+  width: 50%;
+  /* background-color: #04038a; */
+}
+.header {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 65px;
+  line-height: 108.3%;
+  letter-spacing: -0.01em;
+  color: black;
+}
+.header span {
+  color: #04038a;
+}
+.subText {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 130.9%;
+  /* or 37px */
+  margin: 20px 0;
+  color: #000000;
+}
+
+.button {
+  background: #403fff;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  padding: 8px 40px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.fsl {
+  width: 100%;
+}

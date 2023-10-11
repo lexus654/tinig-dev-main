@@ -4,9 +4,11 @@ import Header from "@/components/header/Header";
 
 export default function App({ Component, pageProps }) {
   return (
-    <Fragment>
-      <Header></Header>
-      <Component {...pageProps} />;
-    </Fragment>
+    <div className="wrapper">
+      <div className="BodyWrapper">
+        <Header></Header>
+        <Component {...pageProps} />;
+      </div>
+    </div>
   );
 }
