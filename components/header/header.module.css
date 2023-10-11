@@ -4,8 +4,9 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 50px;
-
-  /* border-bottom: solid 2px #efefef; */
+  width: 1440px;
+  padding-bottom: 10px;
+  border-bottom: solid 2px #efefef;
 }
 .HeaderLeft,
 .HeaderNav {
@@ -22,8 +23,15 @@
   list-style-type: none;
   margin: 0 20px;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 25px;
   font-family: "Nunito", sans-serif;
+}
+.HeaderNav li a:hover {
+  color: blue;
+}
+.HeaderNav li a:focus {
+  color: blue;
+  text-decoration: underline;
 }
 .HeaderNav li a {
   color: black;

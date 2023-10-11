@@ -16,16 +16,13 @@ function Header() {
             <Link href="/product">Translate</Link>
           </li>
           <li className={styles.HeaderNavLinks}>
-            <Link href="/product">Dictionary</Link>
+            <Link href="/features">Features</Link>
           </li>
           <li className={styles.HeaderNavLinks}>
-            <Link href="/product">Translate</Link>
+            <Link href="/mission&vision">Mission and Vision</Link>
           </li>
           <li className={styles.HeaderNavLinks}>
-            <Link href="/product">Contribute</Link>
-          </li>
-          <li className={styles.HeaderNavLinks}>
-            <Link href="/product">Resources</Link>
+            <Link href="/team">Team</Link>
           </li>
         </ul>
       </div>
