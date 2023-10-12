@@ -1,0 +1,139 @@
+.container {
+  width: 620px;
+  height: 100%;
+  border: solid 10px black;
+}
+.videoElement {
+  width: 100%; /* Update this line */
+  height: 100%; /* Update this line */
+}
+.overlayCanvas {
+  position: absolute;
+  width: 100%; /* Update this line */
+  height: 100%; /* Update this line */
+  top: 100px;
+  left: 0;
+  z-index: -1;
+}
+.textContainer,
+.baybayinContainer {
+  width: 810px;
+  height: 145px;
+  background: #ffffff;
+  border: 2px solid #adc5ff;
+  border-radius: 2px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+}
+.productContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.baybayinContainer {
+  font-family: "Noto Sans Tagalog", sans-serif;
+}
+.RightContainer {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+}
+.control {
+  width: 810px;
+  height: 18 5px;
+  background: #adc5ff;
+  border: 2px solid #adc5ff;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  padding: 20px;
+}
+.controlInside {
+  width: 100%;
+  height: 185px;
+  display: flex;
+  background: #adc5ff;
+  border: 1px solid #0024ba;
+  border-radius: 2px;
+  justify-content: center;
+  align-items: self-start;
+}
+.controlText {
+  /* Control Panel */
+  position: absolute;
+  background-color: #adc5ff;
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: #0024ba;
+  top: 150px;
+}
+.controlInside {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.selectModel {
+  margin-bottom: 5px;
+}
+.selectModel,
+.selectVoice {
+  width: 221px;
+  border: solid 2px #0024ba;
+  border-radius: 8px;
+  height: 25px;
+}
+.voiceContainer span {
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  /* identical to box height */
+  text-decoration-line: underline;
+  margin-left: 10px;
+  color: #2c2ac8;
+  cursor: pointer;
+}
+.voiceContainer span:active {
+  color: #52d6de;
+}
+.voiceContainer {
+  display: flex;
+  height: auto;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.startBtn {
+  background: #52d6de;
+  border: 1px solid #292929;
+  border-radius: 5px;
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 23px;
+  color: #292929;
+  width: 163px;
+  height: 48px;
+}
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.audio {
+  display: none;
+}
