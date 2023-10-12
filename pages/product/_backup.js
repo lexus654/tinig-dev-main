@@ -2,18 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import style from "./product.module.css";
 import { toBaybayin } from "filipino-script-translator";
 import axios from "axios";
-import { model } from "@tensorflow/tfjs";
 
 // api 88c5d93956a921db7882f5735a25784f
 
 function App() {
-  // duma
-  // const publishableKey = "rf_ZeFg5UpUU5ejtWd2IIFtBq5R5zg2";
-  // const modelKey = "tinig_2";
-  // eirand
-  const publishableKey = "rf_2gPnixvVexSdRbdNt9zIeV7HqIm2";
-  const modelKey = "qwertyuiopwagniyohanapin";
-
   const videoRef = useRef(null);
   const overlayCanvasRef = useRef(null);
   const overlayCtx =
@@ -47,10 +39,10 @@ function App() {
               // Load the Roboflow model and perform predictions here
               const loadModel = window.roboflow
                 .auth({
-                  publishable_key: publishableKey,
+                  publishable_key: "rf_ZeFg5UpUU5ejtWd2IIFtBq5R5zg2",
                 })
                 .load({
-                  model: modelKey,
+                  model: "tinig_2",
                   version: 1,
                 })
                 .then((model) => {
@@ -104,16 +96,17 @@ function App() {
                   // Function to make predictions and draw every 5 seconds
                   function makePredictionsAndDraw() {
                     model.detect(videoRef.current).then((predictions) => {
+                      console.log("Predictions:", predictions);
                       if (predictions.length > 0) {
-                        if (predictions[0].class !== "") {
-                          makeTextToSpeechRequest(
-                            predictions[0].class,
-                            selectedVoiceId
-                          );
-                        }
                         // Update the predictionClass with the class from the first prediction
                         setPredictionClass(predictions[0].class);
+                        makeTextToSpeechRequest(
+                          predictionClass,
+                          selectedVoiceId
+                        );
+                        console.log("may boys");
                       } else {
+                        console.log("no data walang boys");
                         setPredictionClass(" ");
                       }
                       drawPredictions(predictions);
@@ -154,6 +147,7 @@ function App() {
           }
         );
         // Handle the response data here
+        console.log(response.data);
         setVoices(response.data.voices);
       } catch (error) {
         // Handle errors here
@@ -166,23 +160,31 @@ function App() {
 
   // voice management test
   const callPreview = function () {
+    console.log("tes");
+    console.log(selectedVoiceId);
     const previewURL = voices.find(
       (voice) => voice.voice_id === selectedVoiceId
     );
     setSelectedPreviewURL(previewURL.preview_url);
     setaudioKey(selectedVoiceId);
+    console.log(previewURL.preview_url);
   };
 
   // post functiom
-
-  const makeTextToSpeechRequest = async (text, id) => {
+  const callLog = function () {
+    console.log("nagbago ang imong text");
+  };
+  const makeTextToSpeechRequest = async (text, voice_id) => {
     try {
       const response = await fetch("/api/text-to-speech", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text, id }), // Send the text in the request body
+        body: JSON.stringify({
+          text, // Your text
+          voice_id: selectedVoiceId, // Include the selected voice ID
+        }),
       });
 
       if (!response.ok) {
@@ -256,7 +258,6 @@ function App() {
 
         <div className={style.textContainer}>
           {predictionClass}
-
           {selectedPreviewURL && (
             <audio className={style.audio} key={audioKey} controls autoPlay>
               <source src={selectedPreviewURL} type="audio/mpeg" />

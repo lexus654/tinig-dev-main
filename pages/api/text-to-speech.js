@@ -2,9 +2,8 @@ import fetch from "node-fetch"; // Import the 'fetch' function for server-side A
 
 export default async (req, res) => {
   try {
-    const selectedVoiceId = req.body.voice_id; // Replace with the actual selected voice ID
+    const selectedVoiceId = "2EiwWnXFnvU5JabPnv8n"; // Replace with the actual selected voice ID
     const message = req.body.text; // Assuming you pass the text in the request body
-    console.log(selectedVoiceId);
     const response = await fetch(
       `https://api.elevenlabs.io/v1/text-to-speech/${selectedVoiceId}`,
       {
