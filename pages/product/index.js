@@ -11,8 +11,11 @@ function App() {
   // const publishableKey = "rf_ZeFg5UpUU5ejtWd2IIFtBq5R5zg2";
   // const modelKey = "tinig_2";
   // eirand
-  const publishableKey = "rf_2gPnixvVexSdRbdNt9zIeV7HqIm2";
-  const modelKey = "qwertyuiopwagniyohanapin";
+  // const publishableKey = "rf_2gPnixvVexSdRbdNt9zIeV7HqIm2";
+  // const modelKey = "qwertyuiopwagniyohanapin";
+  // duma part 2
+  const publishableKey = "rf_lhMa2RymNTTeOpWJJqcWK0pXBs23";
+  const modelKey = "tinig_main";
 
   const videoRef = useRef(null);
   const overlayCanvasRef = useRef(null);
