@@ -1,24 +1,14 @@
 .container {
-  width: 620px;
-  height: 100%;
+  width: 640px;
+  height: 480px;
   border: solid 10px black;
+  margin-right: 20px;
 }
-.videoElement {
-  width: 100%; /* Update this line */
-  height: 100%; /* Update this line */
-}
-.overlayCanvas {
-  position: absolute;
-  width: 100%; /* Update this line */
-  height: 100%; /* Update this line */
-  top: 100px;
-  left: 0;
-  z-index: -1;
-}
+
 .textContainer,
 .baybayinContainer {
-  width: 810px;
-  height: 145px;
+  width: 410px;
+  height: 105px;
   background: #ffffff;
   border: 2px solid #adc5ff;
   border-radius: 2px;
@@ -26,11 +16,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
+  font-size: 20px;
 }
 .productContainer {
+  width: 1080px;
+  padding: 0 100px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .baybayinContainer {
@@ -43,8 +35,8 @@
   flex-direction: column;
 }
 .control {
-  width: 810px;
-  height: 18 5px;
+  width: 410px;
+  height: 185px;
   background: #adc5ff;
   border: 2px solid #adc5ff;
   border-radius: 2px;
@@ -76,7 +68,7 @@
   line-height: 20px;
   text-transform: uppercase;
   color: #0024ba;
-  top: 150px;
+  top: 145px;
 }
 .controlInside {
   display: flex;

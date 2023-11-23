@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
       <div className="wrapper">
         <div className="BodyWrapper">
           <Header></Header>
-          <Component {...pageProps} />;
+          <Component {...pageProps} />
         </div>
       </div>
     </>

@@ -72,3 +72,52 @@
   margin-bottom: 60px;
   color: #000000;
 }
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+  }
+  .heading {
+    width: 100%;
+    right: 0px;
+    text-align: center;
+  }
+  .insideContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+  }
+  .bannerWidth {
+    width: 474px;
+    height: auto;
+  }
+  .card {
+    width: 70%;
+    margin-bottom: 40px;
+  }
+}
+@media (max-width: 560px) {
+  .card {
+    width: 70%;
+    margin-bottom: 70px;
+  }
+  .heading {
+    font-size: 35px;
+    width: 80%;
+  }
+}
+@media (max-width: 320px) {
+  .heading {
+    font-size: 30px;
+  }
+  .card {
+    width: 70%;
+    margin-bottom: 100px;
+  }
+}

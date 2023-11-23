@@ -40,3 +40,21 @@
 .HeaderRight img:nth-child(1) {
   margin-right: 30px;
 }
+.burger {
+  display: none;
+}
+@media (max-width: 768px) {
+  .HeaderLeft,
+  .HeaderRight {
+    display: none;
+  }
+  .headerContainer {
+    width: 100vw;
+  }
+  /* .burger {
+    display: initial;
+  }
+  .bm-burger-bars {
+    background: #373a47;
+  } */
+}

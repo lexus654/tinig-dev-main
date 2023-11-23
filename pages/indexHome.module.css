@@ -60,3 +60,62 @@
 .fsl {
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+  }
+  .insideContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+  }
+  .bannerWidth {
+    width: 474px;
+    height: auto;
+  }
+  .rightContainer {
+    margin: 100px 0;
+  }
+  .leftContainer {
+    width: 80%;
+    /* background-color: #04038a; */
+  }
+  .fsl {
+    width: 80%;
+    height: auto;
+  }
+}
+@media (max-width: 560px) {
+  .bannerWidth {
+    width: 374px;
+    height: auto;
+  }
+  .header {
+    font-size: 45px;
+  }
+  .subText {
+    font-size: 20px;
+  }
+}
+@media (max-width: 320px) {
+  .bannerWidth {
+    width: 284px;
+    height: auto;
+  }
+  .header {
+    font-size: 35px;
+  }
+  .subText {
+    font-size: 18px;
+  }
+  .rightContainer {
+    margin: 50px 0;
+  }
+}
