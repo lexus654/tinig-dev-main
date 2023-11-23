@@ -16,7 +16,8 @@ function MissionVision() {
       </div>
       <div className={style.rightContainer}>
         <div className={style.topPart}>
-          Our <span> Mission</span> and <span> Vision</span>
+          Our <span> </span>&nbsp;<span> Mission</span>&nbsp;<span> </span> and
+          <span> </span>&nbsp;<span> Vision </span>
         </div>
         <div className={style.botPart}>
           <div className={style.botPartOne}>

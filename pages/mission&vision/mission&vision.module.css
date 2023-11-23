@@ -2,7 +2,7 @@
   display: flex;
   /* justify-content: center; */
   align-items: start;
-  width: 1440px;
+  width: 1080px;
 }
 .banner {
   height: 620px;
@@ -17,10 +17,10 @@
 }
 .topPart {
   background-image: url("../../assets/missionText.png");
-  width: 920px;
+  width: 770px;
   height: 160px;
   position: absolute;
-  right: 260px;
+  right: 160px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,8 +38,8 @@
 }
 .botPart {
   display: flex;
-  margin-top: 240px;
-  margin-left: 150px;
+  margin-top: 260px;
+  margin-left: 10px;
 }
 
 .mission {
@@ -69,5 +69,5 @@
 .timeline {
   margin-top: -80px;
   height: auto;
-  width: 80px;
+  width: 60px;
 }

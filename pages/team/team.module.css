@@ -3,7 +3,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 1440px;
+  width: 1080px;
 }
 
 .heading {
@@ -81,7 +81,7 @@
 }
 
 .insideContainer {
-  width: 80%;
+  width: 100%;
 }
 .upperRow,
 .bottomRow {
