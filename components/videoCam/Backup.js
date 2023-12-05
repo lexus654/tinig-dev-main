@@ -16,7 +16,7 @@ function VideoCam() {
   // TiNIG MAIN BY DUMA
 
   const publishableKey = "rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2";
-  const modelKey = "tinig_base";
+  const modelKey = "tinig_base/2";
 
   useEffect(() => {
     const initWebcam = async () => {

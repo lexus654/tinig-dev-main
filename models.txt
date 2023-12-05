@@ -1,0 +1,2 @@
+tinig_base/1 (ito yung roboflow model)
+tinig_base/2 (ito yung YOLOv8)
