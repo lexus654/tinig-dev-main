@@ -18,6 +18,7 @@ function App(props) {
   // state of tranlated words
   const [predictedWord, setPredictedWord] = useState("");
   console.log("hello", predictedWord);
+
   useEffect(() => {
     const fetchVoices = async () => {
       try {
@@ -58,13 +59,16 @@ function App(props) {
 
   const makeTextToSpeechRequest = async (text, id) => {
     try {
-      const response = await fetch("/api/text-to-speech", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text, id }), // Send the text in the request body
-      });
+      const response = await fetch(
+        `https://api.elevenlabs.io/v1/text-to-speech/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text }), // Send the text in the request body
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Something went wrong");
