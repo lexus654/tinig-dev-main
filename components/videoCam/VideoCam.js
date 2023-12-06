@@ -40,6 +40,9 @@ function VideoCam(props) {
               model: modelKey,
               version: 1,
             });
+          model.configure({
+            threshold: 0,
+          });
 
           const intervalId = setInterval(async () => {
             const videoElement = videoRef.current.video;
