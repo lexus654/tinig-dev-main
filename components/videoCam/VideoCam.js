@@ -2,12 +2,15 @@ import React, { useEffect, useState, useRef } from "react";
 import Webcam from "react-webcam";
 
 function VideoCam(props) {
-  // state to pass the words to the parent
+  const [getPrediction, setPrediction] = useState([]);
   const [wordPredicted, setWord] = useState("");
+  const [counter, setCounter] = useState(1);
 
-  // function to send the word above
   const predictWord = (word) => {
-    props.setPredictedWord(word);
+    const sentence = `${word} + ${counter}`;
+    props.setPredictedWord(sentence);
+    console.log(word);
+    console.log(counter);
   };
 
   const videoRef = useRef(null);
@@ -16,11 +19,6 @@ function VideoCam(props) {
     height: 480,
     mirrored: true,
   };
-  // eirand emotion
-  // const publishableKey = "rf_2gPnixvVexSdRbdNt9zIeV7HqIm2";
-  // const modelKey = "qwertyuiopwagniyohanapin";
-
-  // TiNIG MAIN BY DUMA
 
   const publishableKey = "rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2";
   let modelKey = props.model;
@@ -36,45 +34,46 @@ function VideoCam(props) {
 
         if (videoRef.current) {
           videoRef.current.srcObject = userMedia;
+          const model = await roboflow
+            .auth({
+              publishable_key: publishableKey,
+            })
+            .load({
+              model: modelKey,
+              version: 1,
+            });
+
+          const intervalId = setInterval(async () => {
+            const videoElement = videoRef.current.video;
+            const predictions = await model.detect(videoElement);
+            setPrediction(predictions);
+
+            setCounter((prevCounter) => prevCounter + 1);
+          }, 5000);
+
+          // Cleanup function to clear the interval when component unmounts
+          return () => clearInterval(intervalId);
         }
-
-        const model = await roboflow
-          .auth({
-            publishable_key: publishableKey,
-          })
-          .load({
-            model: modelKey,
-            version: 1,
-          });
-
-        setInterval(async () => {
-          // Access the video element from the Webcam component
-          const videoElement = videoRef.current.video;
-
-          const predictions = await model.detect(videoElement);
-          console.log("Predictions:", predictions);
-          if (predictions.length !== 0) {
-            setWord(predictions.class);
-          } else {
-            setWord("testing by ronald");
-          }
-          predictWord(wordPredicted);
-          // You can add code here to handle the predictions, draw on the canvas, etc.
-        }, 5000);
       } catch (error) {
         console.error("Error accessing webcam:", error);
       }
     };
 
     initWebcam();
-
-    return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = videoRef.current.srcObject.getTracks();
-        tracks.forEach((track) => track.stop());
-      }
-    };
   }, [modelKey]);
+
+  useEffect(() => {
+    // This effect runs whenever getPrediction changes
+    console.log("getPrediction has changed:", getPrediction);
+
+    if (getPrediction.length === 0) {
+      setWord("testing by ronald");
+    } else {
+      setWord(getPrediction[0].class);
+    }
+
+    predictWord(wordPredicted);
+  }, [getPrediction, counter]);
 
   return (
     <>

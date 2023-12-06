@@ -17,7 +17,6 @@ function App(props) {
   const [model, selectModel] = useState("tinig_base");
   // state of tranlated words
   const [predictedWord, setPredictedWord] = useState("");
-
   console.log("hello", predictedWord);
   useEffect(() => {
     const fetchVoices = async () => {
