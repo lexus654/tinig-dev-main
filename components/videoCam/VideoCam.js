@@ -1,9 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Webcam from "react-webcam";
 
-function VideoCam() {
-  const videoRef = useRef(null);
+function VideoCam(props) {
+  // state to pass the words to the parent
+  const [wordPredicted, setWord] = useState("");
 
+  // function to send the word above
+  const predictWord = (word) => {
+    props.setPredictedWord(word);
+  };
+
+  const videoRef = useRef(null);
   const webcamOptions = {
     width: 620,
     height: 480,
@@ -16,13 +23,15 @@ function VideoCam() {
   // TiNIG MAIN BY DUMA
 
   const publishableKey = "rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2";
-  const modelKey = "tinig_base";
+  let modelKey = props.model;
 
   useEffect(() => {
     const initWebcam = async () => {
       try {
         const userMedia = await navigator.mediaDevices.getUserMedia({
-          video: true,
+          video: {
+            frameRate: 60,
+          },
         });
 
         if (videoRef.current) {
@@ -44,9 +53,14 @@ function VideoCam() {
 
           const predictions = await model.detect(videoElement);
           console.log("Predictions:", predictions);
-
+          if (predictions.length !== 0) {
+            setWord(predictions.class);
+          } else {
+            setWord("testing by ronald");
+          }
+          predictWord(wordPredicted);
           // You can add code here to handle the predictions, draw on the canvas, etc.
-        }, 2000);
+        }, 5000);
       } catch (error) {
         console.error("Error accessing webcam:", error);
       }
@@ -60,7 +74,7 @@ function VideoCam() {
         tracks.forEach((track) => track.stop());
       }
     };
-  }, []);
+  }, [modelKey]);
 
   return (
     <>

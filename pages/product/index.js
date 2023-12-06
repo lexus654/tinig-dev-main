@@ -6,13 +6,19 @@ import axios from "axios";
 // Refactoring
 import VideoCam from "@/components/videoCam/VideoCam";
 
-function App() {
+function App(props) {
   // voice API
   const [voices, setVoices] = useState([]);
   const [selectedVoiceId, setSelectedVoiceId] = useState("");
   const [selectedPreviewURL, setSelectedPreviewURL] = useState("");
   const [audioKey, setaudioKey] = useState("");
 
+  // select Object detection Model
+  const [model, selectModel] = useState("tinig_base");
+  // state of tranlated words
+  const [predictedWord, setPredictedWord] = useState("");
+
+  console.log("hello", predictedWord);
   useEffect(() => {
     const fetchVoices = async () => {
       try {
@@ -70,11 +76,18 @@ function App() {
     }
   };
 
+  // slecting a model and passing it to video cam
+  const handleSelectModel = (e) => {
+    selectModel(e.target.value);
+  };
   return (
     <div className={style.productContainer}>
       <div className={style.leftContainer}>
         <div className={style.container}>
-          <VideoCam></VideoCam>
+          <VideoCam
+            model={model}
+            setPredictedWord={setPredictedWord}
+          ></VideoCam>
         </div>
       </div>
 
@@ -83,15 +96,20 @@ function App() {
         <div className={style.control}>
           <p className={style.controlText}>Control Panel</p>
           <div className={style.controlInside}>
-            <select name="model" id="model" className={style.selectModel}>
-              <option className={style.optionModel} value="FastObject">
-                Fast Object Detection
+            <select
+              onChange={handleSelectModel}
+              name="model"
+              id="model"
+              className={style.selectModel}
+            >
+              <option className={style.optionModel} value="tinig_base">
+                Base Detection Model
               </option>
-              <option className={style.optionModel} value="FastObject2">
-                Fast Object Detection2
+              <option className={style.optionModel} value="tinig_base/1">
+                Roboflow Detection Model
               </option>
-              <option className={style.optionModel} value="FastObject1">
-                Fast Object Detection2
+              <option className={style.optionModel} value="tinig_base/2">
+                YoloV8 Detection Model
               </option>
             </select>
             <div className={style.voiceContainer}>
@@ -123,6 +141,7 @@ function App() {
               <source src={selectedPreviewURL} type="audio/mpeg" />
             </audio>
           )}
+          {predictedWord}
         </div>
         <div className={style.baybayinContainer}>test </div>
       </div>
