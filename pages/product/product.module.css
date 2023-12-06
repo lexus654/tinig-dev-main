@@ -119,6 +119,10 @@
   color: #292929;
   width: 163px;
   height: 48px;
+  cursor: pointer;
+}
+.startBtn:active {
+  background: #78ced3;
 }
 .buttonContainer {
   display: flex;

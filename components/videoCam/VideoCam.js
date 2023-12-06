@@ -9,8 +9,6 @@ function VideoCam(props) {
   const predictWord = (word) => {
     const sentence = `${word} + ${counter}`;
     props.setPredictedWord(sentence);
-    console.log(word);
-    console.log(counter);
   };
 
   const videoRef = useRef(null);
@@ -73,7 +71,7 @@ function VideoCam(props) {
     }
 
     predictWord(wordPredicted);
-  }, [getPrediction, counter]);
+  }, [getPrediction]);
 
   return (
     <>

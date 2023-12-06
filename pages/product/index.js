@@ -52,6 +52,10 @@ function App(props) {
 
   // post functiom
 
+  const startSpeech = () => {
+    makeTextToSpeechRequest(predictedWord, selectedVoiceId);
+  };
+
   const makeTextToSpeechRequest = async (text, id) => {
     try {
       const response = await fetch("/api/text-to-speech", {
@@ -129,7 +133,10 @@ function App(props) {
               <span onClick={callPreview}> Preview </span>
             </div>
             <div className={style.buttonContainer}>
-              <button className={style.startBtn}> Start Translation</button>
+              <button className={style.startBtn} onClick={startSpeech}>
+                {" "}
+                Start Translation
+              </button>
             </div>
           </div>
         </div>
@@ -142,7 +149,9 @@ function App(props) {
           )}
           {predictedWord}
         </div>
-        <div className={style.baybayinContainer}>test </div>
+        <div className={style.baybayinContainer}>
+          {predictedWord ? `${toBaybayin(predictedWord)}` : "test"}
+        </div>
       </div>
     </div>
   );
