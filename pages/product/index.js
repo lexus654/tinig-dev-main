@@ -14,11 +14,9 @@ function App(props) {
   const [audioKey, setaudioKey] = useState("");
 
   // select Object detection Model
-  const [model, selectModel] = useState("tinig_base");
+  const [model, selectModel] = useState("1");
   // state of tranlated words
   const [predictedWord, setPredictedWord] = useState("");
-  console.log("hello", predictedWord);
-
   useEffect(() => {
     const fetchVoices = async () => {
       try {
@@ -27,7 +25,7 @@ function App(props) {
           {
             headers: {
               accept: "application/json",
-              "xi-api-key": "88c5d93956a921db7882f5735a25784f",
+              "xi-api-key": "748cced56ea45b07f298dcf7e3e55ab4",
             },
           }
         );
@@ -58,15 +56,18 @@ function App(props) {
   };
 
   const makeTextToSpeechRequest = async (text, id) => {
+    console.log(text, id);
     try {
       const response = await fetch(
         `https://api.elevenlabs.io/v1/text-to-speech/${id}`,
         {
           method: "POST",
           headers: {
+            "xi-api-key": "748cced56ea45b07f298dcf7e3e55ab4",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ text }), // Send the text in the request body
+          body: JSON.stringify({ text }),
+          // body: `{"voice_settings":{"style":1,"stability":1,"similarity_boost":1},"text":"${text}","model_id":"eleven_multilingual_v2"}`,
         }
       );
 
@@ -109,14 +110,17 @@ function App(props) {
               id="model"
               className={style.selectModel}
             >
-              <option className={style.optionModel} value="tinig_base">
-                Base Detection Model
+              <option className={style.optionModel} value="1">
+                Version 1
               </option>
-              <option className={style.optionModel} value="tinig_base/1">
-                Roboflow Detection Model
+              <option className={style.optionModel} value="2">
+                Version 2
               </option>
-              <option className={style.optionModel} value="tinig_base/2">
-                YoloV8 Detection Model
+              <option className={style.optionModel} value="5">
+                Version 5
+              </option>
+              <option className={style.optionModel} value="7">
+                Version 7
               </option>
             </select>
             <div className={style.voiceContainer}>
