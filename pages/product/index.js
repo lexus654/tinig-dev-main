@@ -16,7 +16,8 @@ function App(props) {
   // select Object detection Model
   const [model, selectModel] = useState("1");
   // state of tranlated words
-  const [predictedWord, setPredictedWord] = useState("");
+  const [predictedWord, setPredictedWord] = useState([]);
+  console.log(predictedWord, "index receive");
   useEffect(() => {
     const fetchVoices = async () => {
       try {
@@ -52,7 +53,8 @@ function App(props) {
   // post functiom
 
   const startSpeech = () => {
-    makeTextToSpeechRequest(predictedWord, selectedVoiceId);
+    let word = Array.from(new Set(predictedWord)).join(" ");
+    makeTextToSpeechRequest(word, selectedVoiceId);
   };
 
   const makeTextToSpeechRequest = async (text, id) => {
@@ -110,11 +112,11 @@ function App(props) {
               id="model"
               className={style.selectModel}
             >
-              <option className={style.optionModel} value="1">
-                Version 1
-              </option>
               <option className={style.optionModel} value="2">
                 Version 2
+              </option>
+              <option className={style.optionModel} value="1">
+                Version 1
               </option>
               <option className={style.optionModel} value="5">
                 Version 5
@@ -155,10 +157,14 @@ function App(props) {
               <source src={selectedPreviewURL} type="audio/mpeg" />
             </audio>
           )}
-          {predictedWord}
+          {Array.from(new Set(predictedWord)).join(", ")}
         </div>
         <div className={style.baybayinContainer}>
-          {predictedWord ? `${toBaybayin(predictedWord)}` : "test"}
+          {Array.from(new Set(predictedWord)).join(" ")
+            ? `${toBaybayin(
+                Array.from(new Set(predictedWord)).join(" ")
+              ).toLowerCase()}`
+            : "test"}
         </div>
       </div>
     </div>

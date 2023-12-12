@@ -7,10 +7,11 @@ function VideoCam(props) {
   const [counter, setCounter] = useState(1);
   const canvasRef = useRef(null);
   const intervalIdRef = useRef(null);
+  const [arrWords, setArrWords] = useState([]);
 
   const predictWord = (word) => {
-    const sentence = `${word} + ${counter}`;
-    props.setPredictedWord(sentence);
+    // const sentence = `${word} + ${counter}`;
+    props.setPredictedWord(arrWords);
   };
 
   const videoRef = useRef(null);
@@ -89,7 +90,7 @@ function VideoCam(props) {
             setPrediction(predictions);
 
             setCounter((prevCounter) => prevCounter + 1);
-          }, 1000);
+          }, 2000);
 
           // Save the intervalId to a ref to access it in cleanup
           intervalIdRef.current = intervalId;
@@ -113,12 +114,11 @@ function VideoCam(props) {
     console.log("getPrediction has changed:", getPrediction);
 
     if (getPrediction.length === 0) {
-      setWord("testing by ronald");
+      console.log("no word found");
     } else {
-      setWord(getPrediction[0].class);
+      // Update arrWords using the previous state
+      setArrWords((prevArr) => [...prevArr, getPrediction[0].class]);
     }
-
-    predictWord(wordPredicted);
 
     return () => {
       const canvas = canvasRef.current;
@@ -126,6 +126,13 @@ function VideoCam(props) {
       ctx.clearRect(0, 0, canvasOptions.width, canvasOptions.height);
     };
   }, [getPrediction]);
+
+  useEffect(() => {
+    // Update wordPredicted whenever arrWords changes
+    setWord([...new Set(arrWords)]);
+    console.log(arrWords);
+    predictWord(arrWords);
+  }, [arrWords]);
 
   return (
     <>

@@ -6,6 +6,7 @@ function VideoCam(props) {
   const [wordPredicted, setWord] = useState("");
   const [counter, setCounter] = useState(1);
   const canvasRef = useRef(null);
+  const intervalIdRef = useRef(null);
 
   const predictWord = (word) => {
     const sentence = `${word} + ${counter}`;
@@ -55,6 +56,12 @@ function VideoCam(props) {
   useEffect(() => {
     const initWebcam = async () => {
       try {
+        // Clear the existing interval when the model changes
+        if (intervalIdRef.current) {
+          clearInterval(intervalIdRef.current);
+          setCounter(1); // Reset the counter
+        }
+
         const userMedia = await navigator.mediaDevices.getUserMedia({
           video: {
             frameRate: 60,
@@ -73,7 +80,7 @@ function VideoCam(props) {
               version: props.model,
             });
           model.configure({
-            threshold: 0.2,
+            threshold: 0.4,
           });
 
           const intervalId = setInterval(async () => {
@@ -82,7 +89,10 @@ function VideoCam(props) {
             setPrediction(predictions);
 
             setCounter((prevCounter) => prevCounter + 1);
-          }, 1500);
+          }, 2000);
+
+          // Save the intervalId to a ref to access it in cleanup
+          intervalIdRef.current = intervalId;
 
           // Cleanup function to clear the interval when the component unmounts
           return () => clearInterval(intervalId);
@@ -103,7 +113,8 @@ function VideoCam(props) {
     console.log("getPrediction has changed:", getPrediction);
 
     if (getPrediction.length === 0) {
-      setWord("testing by ronald");
+      // setWord("testing by ronald");
+      console.log("no word found");
     } else {
       setWord(getPrediction[0].class);
     }
