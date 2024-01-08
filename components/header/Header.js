@@ -40,9 +40,9 @@ function Header() {
             <Link href="/features">Features</Link>
           </li>
 
-          <li className={styles.HeaderNavLinks}>
+          {/* <li className={styles.HeaderNavLinks}>
             <Link href="/mission&vision">Mission and Vision</Link>
-          </li>
+          </li> */}
           <li className={styles.HeaderNavLinks}>
             <Link href="/team">Team</Link>
           </li>
