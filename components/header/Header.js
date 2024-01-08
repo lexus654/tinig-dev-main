@@ -34,8 +34,12 @@ function Header() {
             <Link href="/product">Translate</Link>
           </li>
           <li className={styles.HeaderNavLinks}>
+            <Link href="/dictionary">Dictionary</Link>
+          </li>
+          <li className={styles.HeaderNavLinks}>
             <Link href="/features">Features</Link>
           </li>
+
           <li className={styles.HeaderNavLinks}>
             <Link href="/mission&vision">Mission and Vision</Link>
           </li>
