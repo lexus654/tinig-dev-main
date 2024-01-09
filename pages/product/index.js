@@ -104,7 +104,7 @@ function App(props) {
       {/* delete first */}
       <div className={style.RightContainer}>
         <div className={style.control}>
-          <p className={style.controlText}>Control Panel</p>
+          {/* <p className={style.controlText}>Control Panel</p> */}
           <div className={style.controlInside}>
             <select
               onChange={handleSelectModel}

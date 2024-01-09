@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Webcam from "react-webcam";
+import style from "./video.module.css";
 
 function VideoCam(props) {
   const [getPrediction, setPrediction] = useState([]);
@@ -10,48 +11,72 @@ function VideoCam(props) {
   const [arrWords, setArrWords] = useState([]);
 
   const predictWord = (word) => {
-    // const sentence = `${word} + ${counter}`;
     props.setPredictedWord(arrWords);
   };
 
   const videoRef = useRef(null);
-  const canvasOptions = {
+  const [canvasOptions, setCanvasOptions] = useState({
     width: 620,
     height: 480,
-  };
-  const webcamOptions = {
+  });
+
+  const [webcamOptions, setWebcamOptions] = useState({
     width: 620,
     height: 480,
     mirrored: true,
-  };
+  });
+  const [canvaPosition, setcanvaPosition] = useState({
+    top: "150px",
+    left: "auto",
+  });
 
-  const publishableKey = "rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2";
-  let modelKey = "tinig_base";
-  let versionModel = +props.model;
+  const updateDimensions = () => {
+    const windowWidth = window.innerWidth;
 
-  const drawBoundingBoxes = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    if (windowWidth <= 1000 && windowWidth > 500) {
+      setCanvasOptions({
+        width: 440,
+        height: 300,
+      });
+      setcanvaPosition({
+        top: "84px",
+        left: "auto",
+      });
 
-    // Clear previous drawings
-    ctx.clearRect(0, 0, canvasOptions.width, canvasOptions.height);
-
-    // Draw bounding boxes
-    getPrediction.forEach((prediction) => {
-      const bbox = prediction.bbox;
-      const x = (bbox.x / videoRef.current.video.width) * canvasOptions.width;
-      const y = (bbox.y / videoRef.current.video.height) * canvasOptions.height;
-      const width =
-        (bbox.width / videoRef.current.video.width) * canvasOptions.width;
-      const height =
-        (bbox.height / videoRef.current.video.height) * canvasOptions.height;
-
-      // Set the color of the bounding box
-      ctx.strokeStyle = prediction.color;
-
-      // Draw the bounding box
-      ctx.strokeRect(x - width / 2, y - height / 2, width, height);
-    });
+      setWebcamOptions({
+        width: 440,
+        height: 300,
+        mirrored: true,
+      });
+    } else if (windowWidth <= 500) {
+      setCanvasOptions({
+        width: 300,
+        height: 160,
+      });
+      setcanvaPosition({
+        top: "84px",
+        left: "auto",
+      });
+      setWebcamOptions({
+        width: 300,
+        height: 160,
+        mirrored: true,
+      });
+    } else {
+      setCanvasOptions({
+        width: 620,
+        height: 480,
+      });
+      setcanvaPosition({
+        top: "150px",
+        left: "auto",
+      });
+      setWebcamOptions({
+        width: 620,
+        height: 480,
+        mirrored: true,
+      });
+    }
   };
 
   useEffect(() => {
@@ -122,8 +147,11 @@ function VideoCam(props) {
 
     return () => {
       const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      ctx.clearRect(0, 0, canvasOptions.width, canvasOptions.height);
+      // Check if canvasRef.current is truthy before accessing getContext
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvasOptions.width, canvasOptions.height);
+      }
     };
   }, [getPrediction]);
 
@@ -133,6 +161,43 @@ function VideoCam(props) {
     console.log(arrWords);
     predictWord(arrWords);
   }, [arrWords]);
+
+  useEffect(() => {
+    updateDimensions();
+
+    // Event listener for window resize
+    window.addEventListener("resize", updateDimensions);
+
+    return () => {
+      // Cleanup event listener on component unmount
+      window.removeEventListener("resize", updateDimensions);
+    };
+  }, []);
+
+  const drawBoundingBoxes = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    // Clear previous drawings
+    ctx.clearRect(0, 0, canvasOptions.width, canvasOptions.height);
+
+    // Draw bounding boxes
+    getPrediction.forEach((prediction) => {
+      const bbox = prediction.bbox;
+      const x = (bbox.x / videoRef.current.video.width) * canvasOptions.width;
+      const y = (bbox.y / videoRef.current.video.height) * canvasOptions.height;
+      const width =
+        (bbox.width / videoRef.current.video.width) * canvasOptions.width;
+      const height =
+        (bbox.height / videoRef.current.video.height) * canvasOptions.height;
+
+      // Set the color of the bounding box
+      ctx.strokeStyle = prediction.color;
+
+      // Draw the bounding box
+      ctx.strokeRect(x - width / 2, y - height / 2, width, height);
+    });
+  };
 
   return (
     <>
@@ -154,8 +219,8 @@ function VideoCam(props) {
         ref={canvasRef}
         style={{
           position: "absolute",
-          top: 180,
-          left: 220,
+          top: `${canvaPosition.top}`,
+          left: `${canvaPosition.left}`,
           zIndex: 1, // Make sure the canvas is above the video
         }}
         width={canvasOptions.width}

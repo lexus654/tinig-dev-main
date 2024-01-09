@@ -1,5 +1,8 @@
 @media (max-width: 768px) {
   .headerContainer {
-    display: none;
+    display: block;
+  }
+  .menu {
+    background-color: aqua;
   }
 }

@@ -44,17 +44,24 @@
   display: none;
 }
 @media (max-width: 768px) {
-  .HeaderLeft,
-  .HeaderRight {
+  .HeaderRight,
+  .HeaderNav {
     display: none;
+  }
+  .burger {
+    display: block;
+  }
+  .HeaderLeft {
+    padding: 20px 80px;
   }
   .headerContainer {
     width: 100vw;
   }
-  /* .burger {
-    display: initial;
+}
+@media (max-width: 768px) {
+  .HeaderLeft {
+    display: flex;
+    padding: 0 20px;
+    justify-content: space-between;
   }
-  .bm-burger-bars {
-    background: #373a47;
-  } */
 }
