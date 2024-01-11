@@ -1,149 +1,25 @@
+// December working
+
 import React, { useEffect, useRef, useState } from "react";
 import style from "./product.module.css";
 import { toBaybayin } from "filipino-script-translator";
 import axios from "axios";
-import { model } from "@tensorflow/tfjs";
 
-// api 88c5d93956a921db7882f5735a25784f
+// Refactoring
+import VideoCam from "@/components/videoCam/VideoCam";
 
-function App() {
-  // duma
-  // const publishableKey = "rf_ZeFg5UpUU5ejtWd2IIFtBq5R5zg2";
-  // const modelKey = "tinig_2";
-  // eirand
-  // const publishableKey = "rf_2gPnixvVexSdRbdNt9zIeV7HqIm2";
-  // const modelKey = "qwertyuiopwagniyohanapin";
-  // duma part 2
-  const publishableKey = "rf_lhMa2RymNTTeOpWJJqcWK0pXBs23";
-  const modelKey = "tinig_main";
-
-  const videoRef = useRef(null);
-  const overlayCanvasRef = useRef(null);
-  const overlayCtx =
-    overlayCanvasRef.current && overlayCanvasRef.current.getContext("2d");
-
-  // data management
-  const [predictionClass, setPredictionClass] = useState("");
+function App(props) {
+  // voice API
   const [voices, setVoices] = useState([]);
   const [selectedVoiceId, setSelectedVoiceId] = useState("");
   const [selectedPreviewURL, setSelectedPreviewURL] = useState("");
-  const [audioKey, setaudioKey] = useState(""); // to re render audio
-  // voice data for converted sign language
-  // still need the prediction class - eto yung text
-  const [audioKey2, setaudioKey2] = useState(""); // to re render audio for the second
+  const [audioKey, setaudioKey] = useState("");
 
-  useEffect(() => {
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          if (videoRef.current) {
-            videoRef.current.srcObject = stream;
-          }
-
-          if (overlayCtx) {
-            videoRef.current.onloadedmetadata = () => {
-              // Set overlay canvas dimensions to match video
-              overlayCanvasRef.current.width = videoRef.current.videoWidth;
-              overlayCanvasRef.current.height = videoRef.current.videoHeight;
-
-              // Load the Roboflow model and perform predictions here
-              const loadModel = window.roboflow
-                .auth({
-                  publishable_key: publishableKey,
-                })
-                .load({
-                  model: modelKey,
-                  version: 1,
-                })
-                .then((model) => {
-                  // Model has loaded!
-                  console.log("Model is loaded");
-
-                  function drawPredictions(predictions) {
-                    overlayCtx.clearRect(
-                      0,
-                      0,
-                      overlayCanvasRef.current.width,
-                      overlayCanvasRef.current.height
-                    );
-
-                    predictions.forEach((prediction) => {
-                      const bbox = prediction.bbox;
-                      const label = prediction.class;
-                      const confidence = prediction.confidence;
-                      const color = prediction.color;
-
-                      // Adjust the bounding box to match the video dimensions
-                      const x =
-                        (bbox.x / videoRef.current.videoWidth) *
-                        overlayCanvasRef.current.width;
-                      const y =
-                        (bbox.y / videoRef.current.videoHeight) *
-                        overlayCanvasRef.current.height;
-                      const width =
-                        (bbox.width / videoRef.current.videoWidth) *
-                        overlayCanvasRef.current.width;
-                      const height =
-                        (bbox.height / videoRef.current.videoHeight) *
-                        overlayCanvasRef.current.height;
-
-                      // Draw bounding box
-                      overlayCtx.strokeStyle = color;
-                      overlayCtx.lineWidth = 2;
-                      overlayCtx.strokeRect(x, y, width, height);
-
-                      // Draw label and confidence
-                      overlayCtx.fillStyle = color;
-                      overlayCtx.font = "16px Arial";
-                      overlayCtx.fillText(
-                        `${label} (${confidence.toFixed(2)}`,
-                        x,
-                        y - 5
-                      );
-                    });
-                  }
-
-                  // Function to make predictions and draw every 5 seconds
-                  function makePredictionsAndDraw() {
-                    model.detect(videoRef.current).then((predictions) => {
-                      if (predictions.length > 0) {
-                        if (predictions[0].class !== "") {
-                          makeTextToSpeechRequest(
-                            predictions[0].class,
-                            selectedVoiceId
-                          );
-                        }
-                        // Update the predictionClass with the class from the first prediction
-                        setPredictionClass(predictions[0].class);
-                      } else {
-                        setPredictionClass(" ");
-                      }
-                      drawPredictions(predictions);
-                    });
-                  }
-
-                  // // Call the function to make predictions and draw initially
-                  makePredictionsAndDraw();
-
-                  // Set up an interval to make predictions and draw every 5 seconds
-                  setInterval(() => {
-                    makePredictionsAndDraw();
-                  }, 5000);
-                })
-                .catch((error) => {
-                  console.error("Error loading the model:", error);
-                });
-            };
-          }
-        })
-        .catch((error) => {
-          console.log("Something went wrong!", error);
-        });
-    }
-  }, [overlayCtx]);
-
-  // voice management
+  // select Object detection Model
+  const [model, selectModel] = useState("1");
+  // state of tranlated words
+  const [predictedWord, setPredictedWord] = useState([]);
+  console.log(predictedWord, "index receive");
   useEffect(() => {
     const fetchVoices = async () => {
       try {
@@ -152,7 +28,7 @@ function App() {
           {
             headers: {
               accept: "application/json",
-              "xi-api-key": "88c5d93956a921db7882f5735a25784f",
+              "xi-api-key": "748cced56ea45b07f298dcf7e3e55ab4",
             },
           }
         );
@@ -178,15 +54,26 @@ function App() {
 
   // post functiom
 
+  const startSpeech = () => {
+    let word = Array.from(new Set(predictedWord)).join(" ");
+    makeTextToSpeechRequest(word, selectedVoiceId);
+  };
+
   const makeTextToSpeechRequest = async (text, id) => {
+    console.log(text, id);
     try {
-      const response = await fetch("/api/text-to-speech", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text, id }), // Send the text in the request body
-      });
+      const response = await fetch(
+        `https://api.elevenlabs.io/v1/text-to-speech/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "xi-api-key": "748cced56ea45b07f298dcf7e3e55ab4",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text }),
+          // body: `{"voice_settings":{"style":1,"stability":1,"similarity_boost":1},"text":"${text}","model_id":"eleven_multilingual_v2"}`,
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Something went wrong");
@@ -201,37 +88,43 @@ function App() {
     }
   };
 
+  // slecting a model and passing it to video cam
+  const handleSelectModel = (e) => {
+    selectModel(e.target.value);
+  };
   return (
     <div className={style.productContainer}>
       <div className={style.leftContainer}>
         <div className={style.container}>
-          <video
-            ref={videoRef}
-            className={style.videoElement}
-            id="videoElement"
-            autoPlay
-          />
-          <canvas
-            ref={overlayCanvasRef}
-            className={style.overlayCanvas}
-            id="overlayCanvas"
-          />
+          <VideoCam
+            model={model}
+            setPredictedWord={setPredictedWord}
+          ></VideoCam>
         </div>
-        <div></div>
       </div>
+
+      {/* delete first */}
       <div className={style.RightContainer}>
         <div className={style.control}>
-          <p className={style.controlText}>Control Panel</p>
+          {/* <p className={style.controlText}>Control Panel</p> */}
           <div className={style.controlInside}>
-            <select name="model" id="model" className={style.selectModel}>
-              <option className={style.optionModel} value="FastObject">
-                Fast Object Detection
+            <select
+              onChange={handleSelectModel}
+              name="model"
+              id="model"
+              className={style.selectModel}
+            >
+              <option className={style.optionModel} value="2">
+                Version 2
               </option>
-              <option className={style.optionModel} value="FastObject2">
-                Fast Object Detection2
+              <option className={style.optionModel} value="1">
+                Version 1
               </option>
-              <option className={style.optionModel} value="FastObject1">
-                Fast Object Detection2
+              <option className={style.optionModel} value="5">
+                Version 5
+              </option>
+              <option className={style.optionModel} value="7">
+                Version 7
               </option>
             </select>
             <div className={style.voiceContainer}>
@@ -252,22 +145,28 @@ function App() {
               <span onClick={callPreview}> Preview </span>
             </div>
             <div className={style.buttonContainer}>
-              <button className={style.startBtn}> Start Translation</button>
+              <button className={style.startBtn} onClick={startSpeech}>
+                {" "}
+                Start Translation
+              </button>
             </div>
           </div>
         </div>
 
         <div className={style.textContainer}>
-          {predictionClass}
-
           {selectedPreviewURL && (
             <audio className={style.audio} key={audioKey} controls autoPlay>
               <source src={selectedPreviewURL} type="audio/mpeg" />
             </audio>
           )}
+          {Array.from(new Set(predictedWord)).join(", ")}
         </div>
         <div className={style.baybayinContainer}>
-          {toBaybayin(predictionClass)}
+          {Array.from(new Set(predictedWord)).join(" ")
+            ? `${toBaybayin(
+                Array.from(new Set(predictedWord)).join(" ")
+              ).toLowerCase()}`
+            : "test"}
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import axios from "axios";
 
 // Refactoring
 import VideoCam from "@/components/videoCam/VideoCam";
+import { flushSync } from "react-dom";
 
 function App(props) {
   // voice API
@@ -12,12 +13,18 @@ function App(props) {
   const [selectedVoiceId, setSelectedVoiceId] = useState("");
   const [selectedPreviewURL, setSelectedPreviewURL] = useState("");
   const [audioKey, setaudioKey] = useState("");
-
+  const [arrWords, setArrWords] = useState([]);
   // select Object detection Model
-  const [model, selectModel] = useState("1");
+  const [model, selectModel] = useState("");
+  // for api key passing to videocam
+  const [apiKey, selectApiKey] = useState("");
+  // for model ke`y passing to videocam
+  const [modelKey, selectModelKey] = useState("");
+  // for confidence threshol passing to videocam
+  const [threshold, selectThreshold] = useState(0.6);
   // state of tranlated words
   const [predictedWord, setPredictedWord] = useState([]);
-  console.log(predictedWord, "index receive");
+
   useEffect(() => {
     const fetchVoices = async () => {
       try {
@@ -51,14 +58,22 @@ function App(props) {
   };
 
   // post functiom
+  let word = [];
 
   const startSpeech = () => {
-    let word = Array.from(new Set(predictedWord)).join(" ");
-    makeTextToSpeechRequest(word, selectedVoiceId);
+    const result = arrWords.join("");
+    makeTextToSpeechRequest(result, selectedVoiceId);
+  };
+  const callFlush = () => {
+    setArrWords([]);
   };
 
+  useEffect(() => {
+    setArrWords((prevArr) => [...prevArr, predictedWord]);
+  }, [predictedWord]);
+
   const makeTextToSpeechRequest = async (text, id) => {
-    console.log(text, id);
+    console.log(text);
     try {
       const response = await fetch(
         `https://api.elevenlabs.io/v1/text-to-speech/${id}`,
@@ -68,8 +83,8 @@ function App(props) {
             "xi-api-key": "748cced56ea45b07f298dcf7e3e55ab4",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ text }),
-          // body: `{"voice_settings":{"style":1,"stability":1,"similarity_boost":1},"text":"${text}","model_id":"eleven_multilingual_v2"}`,
+          // body: JSON.stringify({ text }),
+          body: `{"model_id":"eleven_monolingual_v1","text":"${text}","voice_settings":{"similarity_boost":0.6,"stability":0.45,"style":0,"use_speaker_boost":false}}`,
         }
       );
 
@@ -88,7 +103,14 @@ function App(props) {
 
   // slecting a model and passing it to video cam
   const handleSelectModel = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
     selectModel(e.target.value);
+    selectApiKey(selectedOption.getAttribute("data-apikey"));
+    selectModelKey(selectedOption.getAttribute("data-modelkey"));
+    console.log("ted", selectedOption.getAttribute("data-modelkey"));
+  };
+  const handleSelectThreshold = (e) => {
+    selectThreshold(e.target.value);
   };
   return (
     <div className={style.productContainer}>
@@ -96,7 +118,11 @@ function App(props) {
         <div className={style.container}>
           <VideoCam
             model={model}
+            apikey={apiKey}
+            modelkey={modelKey}
+            threshold={+threshold}
             setPredictedWord={setPredictedWord}
+            refresh={callFlush}
           ></VideoCam>
         </div>
       </div>
@@ -112,17 +138,106 @@ function App(props) {
               id="model"
               className={style.selectModel}
             >
-              <option className={style.optionModel} value="2">
-                Version 2
+              <option
+                className={style.optionModel}
+                value=""
+                data-apikey=""
+                data-modelkey=""
+              >
+                Select a Model
               </option>
-              <option className={style.optionModel} value="1">
-                Version 1
+              <option
+                className={style.optionModel}
+                value="2"
+                data-apikey="rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2"
+                data-modelkey="tinig_base"
+              >
+                tinig_base/2 (v2)(YOLOv5)
               </option>
-              <option className={style.optionModel} value="5">
-                Version 5
+              <option
+                className={style.optionModel}
+                value="11"
+                data-apikey="rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2"
+                data-modelkey="tinig_base"
+              >
+                tinig_base/11 (v11)(YOLOv5)
               </option>
-              <option className={style.optionModel} value="7">
-                Version 7
+              <option
+                className={style.optionModel}
+                value="1"
+                data-apikey="rf_EfwTZMgihcV11xhMsZTVqpkzdKD2"
+                data-modelkey="tinig_single"
+              >
+                tinig_single/1 (v1)(RoboFlow)
+              </option>
+              <option
+                className={style.optionModel}
+                value="2"
+                data-apikey="rf_EfwTZMgihcV11xhMsZTVqpkzdKD2"
+                data-modelkey="tinig_single"
+              >
+                tinig_single/2 (v2)(YOLOv8)
+              </option>
+              <option
+                className={style.optionModel}
+                value="1"
+                data-apikey="rf_yRT4Z51EDybxTNiVqpfNdYwz5dC2"
+                data-modelkey="alphabet_all"
+              >
+                alphabet_all/1 (v3)(YOLOv8)
+              </option>
+              <option
+                className={style.optionModel}
+                value="3"
+                data-apikey="rf_yRT4Z51EDybxTNiVqpfNdYwz5dC2"
+                data-modelkey="alphabet_all"
+              >
+                alphabet_all/3 (v3)(YOLOv8)
+              </option>
+              <option
+                className={style.optionModel}
+                value="1"
+                data-apikey="rf_OoDSh3cVfzWaqk0bcLjG9mWnAEl1"
+                data-modelkey="hand-sign-yhknu"
+              >
+                hand-sign-yhknu/1 (v1)(YOLOv5)
+              </option>
+            </select>
+            <select
+              onChange={handleSelectThreshold}
+              name="threshold"
+              id="threshold"
+              className={style.selectModel}
+            >
+              <option className={style.optionModel} value="0.6">
+                Select a threshold
+              </option>
+              <option className={style.optionModel} value="0.1">
+                10%
+              </option>
+              <option className={style.optionModel} value="0.2">
+                20%
+              </option>
+              <option className={style.optionModel} value="0.3">
+                30%
+              </option>
+              <option className={style.optionModel} value="0.4">
+                40%
+              </option>
+              <option className={style.optionModel} value="0.5">
+                50%
+              </option>
+              <option className={style.optionModel} value="0.6">
+                60%
+              </option>
+              <option className={style.optionModel} value="0.7">
+                70%
+              </option>
+              <option className={style.optionModel} value="0.8">
+                80%
+              </option>
+              <option className={style.optionModel} value="0.9">
+                90%
               </option>
             </select>
             <div className={style.voiceContainer}>
@@ -142,10 +257,18 @@ function App(props) {
               </select>
               <span onClick={callPreview}> Preview </span>
             </div>
+
             <div className={style.buttonContainer}>
               <button className={style.startBtn} onClick={startSpeech}>
                 {" "}
                 Start Translation
+              </button>
+              <button
+                className={`${style.startBtn} ${style.marginBtn}`}
+                onClick={callFlush}
+              >
+                {" "}
+                Refresh
               </button>
             </div>
           </div>
@@ -157,14 +280,16 @@ function App(props) {
               <source src={selectedPreviewURL} type="audio/mpeg" />
             </audio>
           )}
-          {Array.from(new Set(predictedWord)).join(", ")}
+          {/* {Array.from(new Set(arrWords)).join(", ")} */}
+          {arrWords}
         </div>
         <div className={style.baybayinContainer}>
-          {Array.from(new Set(predictedWord)).join(" ")
+          {/* {Array.from(new Set(predictedWord)).join(" ")
             ? `${toBaybayin(
                 Array.from(new Set(predictedWord)).join(" ")
               ).toLowerCase()}`
-            : "test"}
+            : "test"} */}
+          {toBaybayin(`${arrWords}`)}
         </div>
       </div>
     </div>

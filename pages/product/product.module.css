@@ -153,6 +153,9 @@
     top: 424px;
   }
 }
+.marginBtn {
+  margin-left: 5px;
+}
 @media (max-width: 500px) {
   .container {
     width: 305px;

@@ -13,6 +13,8 @@ function VideoCam(props) {
   const [publishableKey, setPublishableKey] = useState(
     "rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2"
   );
+  // const publishableKey = "rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2";
+  // let modelKey = "tinig_base";
 
   const predictWord = (word) => {
     props.setPredictedWord(word);
@@ -83,72 +85,57 @@ function VideoCam(props) {
     }
   };
 
-  const initWebcam = async () => {
-    try {
-      // Clear the existing interval when the model changes
-      if (intervalIdRef.current) {
-        clearInterval(intervalIdRef.current);
-        setCounter(1); // Reset the counter
-      }
+  useEffect(() => {
+    const initWebcam = async () => {
+      try {
+        // Clear the existing interval when the model changes
+        if (intervalIdRef.current) {
+          clearInterval(intervalIdRef.current);
+          setCounter(1); // Reset the counter
+        }
 
-      // Clear the existing model and tracks
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = videoRef.current.srcObject.getTracks();
-        tracks.forEach((track) => track.stop());
-        videoRef.current.srcObject = null;
-      }
-
-      const userMedia = await navigator.mediaDevices.getUserMedia({
-        video: {
-          frameRate: 60,
-        },
-      });
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = userMedia;
-
-        // Auth and load the new model
-        const model = await roboflow
-          .auth({
-            publishable_key: props.apikey,
-          })
-          .load({
-            model: props.modelkey,
-            version: props.model,
-          });
-
-        model.configure({
-          threshold: props.threshold,
+        const userMedia = await navigator.mediaDevices.getUserMedia({
+          video: {
+            frameRate: 60,
+          },
         });
 
-        // Set up the new interval
-        const intervalId = setInterval(async () => {
-          const videoElement = videoRef.current.video;
-          const predictions = await model.detect(videoElement);
-          setPrediction(predictions);
+        if (videoRef.current) {
+          videoRef.current.srcObject = userMedia;
 
-          setCounter((prevCounter) => prevCounter + 1);
-        }, 2000);
+          const model = await roboflow
+            .auth({
+              publishable_key: props.apikey,
+            })
+            .load({
+              model: props.modelkey,
+              version: props.model,
+            });
+          model.configure({
+            threshold: 0.85,
+          });
 
-        // Save the intervalId to a ref to access it in cleanup
-        intervalIdRef.current = intervalId;
+          const intervalId = setInterval(async () => {
+            const videoElement = videoRef.current.video;
+            const predictions = await model.detect(videoElement);
+            setPrediction(predictions);
 
-        // Cleanup function to clear the interval when the component unmounts
-        return () => {
-          clearInterval(intervalId);
-          const tracks = userMedia.getTracks();
-          tracks.forEach((track) => track.stop());
-          videoRef.current.srcObject = null;
-        };
+            setCounter((prevCounter) => prevCounter + 1);
+          }, 2000);
+
+          // Save the intervalId to a ref to access it in cleanup
+          intervalIdRef.current = intervalId;
+
+          // Cleanup function to clear the interval when the component unmounts
+          return () => clearInterval(intervalId);
+        }
+      } catch (error) {
+        console.error("Error accessing webcam:", error);
       }
-    } catch (error) {
-      console.error("Error accessing webcam:", error);
-    }
-  };
+    };
 
-  useEffect(() => {
     initWebcam();
-  }, [props.model, props.modelkey, props.apikey, props.threshold]);
+  }, [props.model, props.modelkey, props.apikey]);
 
   useEffect(() => {
     // Call the function to draw bounding boxes whenever predictions change
@@ -174,6 +161,13 @@ function VideoCam(props) {
       }
     };
   }, [getPrediction]);
+
+  // useEffect(() => {
+  //   // // Update wordPredicted whenever arrWords changes
+  //   // setWord([...new Set(arrWords)]);
+  //   // console.log(arrWords);
+  //   // predictWord(pred);
+  // }, [arrWords]);
 
   useEffect(() => {
     updateDimensions();
