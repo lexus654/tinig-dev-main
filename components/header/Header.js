@@ -95,7 +95,10 @@ function Header() {
         </Link>
         <ul className={styles.HeaderNav}>
           <li className={styles.HeaderNavLinks}>
-            <Link href="/product">Translate</Link>
+            <Link href="/product">FSL to Speech</Link>
+          </li>
+          <li className={styles.HeaderNavLinks}>
+            <Link href="/speech">Speech to FSL</Link>
           </li>
           <li className={styles.HeaderNavLinks}>
             <Link href="/dictionary">Dictionary</Link>
@@ -121,7 +124,10 @@ function Header() {
       <div id="outer-container" className={styles.burger}>
         <Menu styles={styles2}>
           <Link id="product" className="menu-item" href="/product">
-            Translate
+            FSL to Speech
+          </Link>
+          <Link id="speech" className="menu-item" href="/speech">
+            Speech to FSL
           </Link>
           <Link id="dictionary" className="menu-item" href="/dictionary">
             Dictionary
