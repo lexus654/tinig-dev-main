@@ -1,3 +1,5 @@
+// Back up before space and backspace button
+
 import React, { useEffect, useRef, useState } from "react";
 import style from "./product.module.css";
 import { toBaybayin } from "filipino-script-translator";
@@ -14,8 +16,6 @@ function App(props) {
   const [selectedPreviewURL, setSelectedPreviewURL] = useState("");
   const [audioKey, setaudioKey] = useState("");
   const [arrWords, setArrWords] = useState([]);
-  // previous arr words for backspace
-  const [previous, setPrevious] = useState([]);
   // select Object detection Model
   const [model, selectModel] = useState("");
   // for api key passing to videocam
@@ -71,17 +71,7 @@ function App(props) {
   };
 
   useEffect(() => {
-    if (predictedWord === "*") {
-      if (arrWords.length <= 1) {
-        setArrWords([]);
-      } else {
-        setArrWords(previous[previous.length - 1]);
-      }
-    } else {
-      setArrWords((prevArr) => [...prevArr, predictedWord]);
-      setPrevious((prevArr) => [...prevArr, arrWords]);
-      console.log("previis", previous);
-    }
+    setArrWords((prevArr) => [...prevArr, predictedWord]);
   }, [predictedWord]);
 
   const makeTextToSpeechRequest = async (text, id) => {
@@ -166,55 +156,53 @@ function App(props) {
               >
                 tinig_base/2 (v2)(YOLOv5)
               </option>
-
               <option
                 className={style.optionModel}
-                value="5"
+                value="11"
+                data-apikey="rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2"
+                data-modelkey="tinig_base"
+              >
+                tinig_base/11 (v11)(YOLOv5)
+              </option>
+              <option
+                className={style.optionModel}
+                value="1"
                 data-apikey="rf_EfwTZMgihcV11xhMsZTVqpkzdKD2"
                 data-modelkey="tinig_single"
               >
-                tinig_single/5 (v5)(RoboFlow)
+                tinig_single/1 (v1)(RoboFlow)
               </option>
-
               <option
                 className={style.optionModel}
-                value="6"
+                value="2"
                 data-apikey="rf_EfwTZMgihcV11xhMsZTVqpkzdKD2"
                 data-modelkey="tinig_single"
               >
-                tinig_single/6 (v6)(YOLOv8)
+                tinig_single/2 (v2)(YOLOv8)
               </option>
               <option
                 className={style.optionModel}
-                value="7"
-                data-apikey="rf_EfwTZMgihcV11xhMsZTVqpkzdKD2"
-                data-modelkey="tinig_single"
-              >
-                tinig_single/7 (v7)(YOLOv5)
-              </option>
-              <option
-                className={style.optionModel}
-                value="4"
+                value="1"
                 data-apikey="rf_yRT4Z51EDybxTNiVqpfNdYwz5dC2"
                 data-modelkey="alphabet_all"
               >
-                alphabet_all/4 (v4)(RoboFlow)
+                alphabet_all/1 (v3)(YOLOv8)
               </option>
               <option
                 className={style.optionModel}
-                value="5"
+                value="3"
                 data-apikey="rf_yRT4Z51EDybxTNiVqpfNdYwz5dC2"
                 data-modelkey="alphabet_all"
               >
-                alphabet_all/5 (v5)(YOLOv8)
+                alphabet_all/3 (v3)(YOLOv8)
               </option>
               <option
                 className={style.optionModel}
-                value="6"
-                data-apikey="rf_yRT4Z51EDybxTNiVqpfNdYwz5dC2"
-                data-modelkey="alphabet_all"
+                value="1"
+                data-apikey="rf_OoDSh3cVfzWaqk0bcLjG9mWnAEl1"
+                data-modelkey="hand-sign-yhknu"
               >
-                alphabet_all/6 (v6)(YOLOv5)
+                hand-sign-yhknu/1 (v1)(YOLOv5)
               </option>
             </select>
             <select

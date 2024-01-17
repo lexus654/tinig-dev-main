@@ -160,9 +160,15 @@ function VideoCam(props) {
     if (getPrediction.length === 0) {
       // console.log("no word found");
     } else {
-      // Update arrWords using the previous state
-      // setArrWords((prevArr) => [...prevArr, getPrediction[0].class]);
-      predictWord(getPrediction[0].class);
+      if (getPrediction[0].class == "-") {
+        predictWord(" ");
+      } else if (getPrediction[0].class == "backspace") {
+        predictWord("*");
+      } else {
+        // Update arrWords using the previous state
+        // setArrWords((prevArr) => [...prevArr, getPrediction[0].class]);
+        predictWord(getPrediction[0].class);
+      }
     }
 
     return () => {
