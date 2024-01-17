@@ -1,3 +1,29 @@
 .gifHolder {
   display: flex;
 }
+.startBtn {
+  background: #52d6de;
+  border: 1px solid #292929;
+  border-radius: 5px;
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 23px;
+  color: #292929;
+  width: 163px;
+  height: 48px;
+  cursor: pointer;
+}
+.startBtn:active {
+  background: #78ced3;
+}
+.marginBtn {
+  margin-left: 15px;
+}
+.color2 {
+  background: #50df2d;
+}
+.color3 {
+  background: #cad378;
+}
