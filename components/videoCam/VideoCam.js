@@ -128,7 +128,7 @@ function VideoCam(props) {
           setPrediction(predictions);
 
           setCounter((prevCounter) => prevCounter + 1);
-        }, 2000);
+        }, 500);
 
         // Save the intervalId to a ref to access it in cleanup
         intervalIdRef.current = intervalId;
