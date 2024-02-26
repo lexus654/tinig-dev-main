@@ -3,6 +3,7 @@ import Webcam from "react-webcam";
 import style from "./video.module.css";
 
 function VideoCam(props) {
+  console.log("test hakdog");
   const [getPrediction, setPrediction] = useState([]);
   const [wordPredicted, setWord] = useState("");
   const [counter, setCounter] = useState(1);
