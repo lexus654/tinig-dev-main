@@ -876,6 +876,7 @@ function Dictionary(props) {
     WEATHER_array,
     QUESTIONS_array,
   ];
+
   // Organize your arrays into a list for easier management
   const [visibleArrayIndex, setVisibleArrayIndex] = useState(null);
 
