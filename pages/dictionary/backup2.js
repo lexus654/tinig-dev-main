@@ -274,13 +274,13 @@ import Teacher from "../../assets/REDICTIONARY/OCCUPATIONS/Teacher.gif";
 import Guard from "../../assets/REDICTIONARY/OCCUPATIONS/Guard.gif";
 import Lawyer from "../../assets/REDICTIONARY/OCCUPATIONS/Lawyer.gif";
 
-// PRONOUNS
-import sa_iyo from "../../assets/REDICTIONARY/PRONOUNS/sa iyo.gif";
-import sa_kanila from "../../assets/REDICTIONARY/PRONOUNS/sa kanila.gif";
-import tayo from "../../assets/REDICTIONARY/PRONOUNS/tayo.gif";
-import atin from "../../assets/REDICTIONARY/PRONOUNS/atin.gif";
-import kami from "../../assets/REDICTIONARY/PRONOUNS/kami.gif";
-import sa_akin from "../../assets/REDICTIONARY/PRONOUNS/sa akin.gif";
+// CHANGE PATH
+import sa_iyo from "../../assets/REDICTIONARY/PREPOSITION/sa iyo.gif";
+import sa_kanila from "../../assets/REDICTIONARY/PREPOSITION/sa kanila.gif";
+import tayo from "../../assets/REDICTIONARY/PREPOSITION/tayo.gif";
+import atin from "../../assets/REDICTIONARY/PREPOSITION/atin.gif";
+import kami from "../../assets/REDICTIONARY/PREPOSITION/kami.gif";
+import sa_akin from "../../assets/REDICTIONARY/PREPOSITION/sa akin.gif";
 
 // TERMINOLOGIES
 import Attention from "../../assets/REDICTIONARY/TERMINOLOGIES/Attention.gif";
