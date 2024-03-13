@@ -4,11 +4,28 @@ import logo from "../../assets/logo.png";
 import notif from "../../assets/notif.png";
 import profile from "../../assets/profile.png";
 import Link from "next/link";
+
+import Bihasa from "@/components/instructions/Bihasa";
+import Dikta from "@/components/instructions/Dikta";
+import Signayo from "@/components/instructions/Signayo";
 import { useState, useEffect } from "react";
 // hamburger menu for mobile
 import { slide as Menu } from "react-burger-menu";
 
 function Header() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible1, setIsVisible1] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+
+  const showBihasa = () => {
+    setIsVisible(true);
+  };
+  const showDikta = () => {
+    setIsVisible1(true);
+  };
+  const showSignayo = () => {
+    setIsVisible2(true);
+  };
   const showSettings = (event) => {
     event.preventDefault();
     // Add your settings logic here
@@ -95,10 +112,13 @@ function Header() {
         </Link>
         <ul className={styles.HeaderNav}>
           <li className={styles.HeaderNavLinks}>
-            <Link href="/product">FSL to Speech</Link>
+            <p onClick={showBihasa}>FSL to Speech</p>
           </li>
           <li className={styles.HeaderNavLinks}>
-            <Link href="/speech">Speech to FSL</Link>
+            <p onClick={showDikta}>Speech to FSL</p>
+          </li>
+          <li className={styles.HeaderNavLinks}>
+            <p onClick={showSignayo}>Movie Clips</p>
           </li>
           <li className={styles.HeaderNavLinks}>
             <Link href="/dictionary">Dictionary</Link>
@@ -110,9 +130,6 @@ function Header() {
           {/* <li className={styles.HeaderNavLinks}>
             <Link href="/mission&vision">Mission and Vision</Link>
           </li> */}
-          <li className={styles.HeaderNavLinks}>
-            <Link href="/team">Team</Link>
-          </li>
         </ul>
       </div>
       {/* <div className={styles.HeaderRight}>
@@ -140,6 +157,11 @@ function Header() {
           </Link>
         </Menu>
       </div>
+
+      {/* pop up */}
+      <Bihasa isVisible={isVisible} setIsVisible={setIsVisible} />
+      <Dikta isVisible={isVisible1} setIsVisible={setIsVisible1} />
+      <Signayo isVisible={isVisible2} setIsVisible={setIsVisible2} />
     </div>
   );
 }

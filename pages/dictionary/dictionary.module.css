@@ -27,3 +27,33 @@
     max-width: 650px;
   }
 }
+
+.buttonArrays {
+  background: #403fff;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  font-family: "Nunito", sans-serif;
+  font-style: normal;
+  padding: 8px 20px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  border-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.bigContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.displayContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}

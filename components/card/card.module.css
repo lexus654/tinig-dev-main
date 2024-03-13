@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 10px;
 }
 .roundedImage {
   width: 200px;
