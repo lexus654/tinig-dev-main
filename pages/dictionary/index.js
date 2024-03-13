@@ -315,12 +315,12 @@ import Abuse from "../../assets/REDICTIONARY/TERMINOLOGIES/Abuse.gif";
 
 // PRONOUNS
 // CHANGE PATH
-import sa_iyo from "../../assets/REDICTIONARY/PRONOUNS/sa iyo.gif";
-import sa_kanila from "../../assets/REDICTIONARY/PRONOUNS/sa kanila.gif";
-import tayo from "../../assets/REDICTIONARY/PRONOUNS/tayo.gif";
-import atin from "../../assets/REDICTIONARY/PRONOUNS/atin.gif";
-import kami from "../../assets/REDICTIONARY/PRONOUNS/kami.gif";
-import sa_akin from "../../assets/REDICTIONARY/PRONOUNS/sa akin.gif";
+import sa_iyo from "../../assets/REDICTIONARY/PREPOSITION/sa iyo.gif";
+import sa_kanila from "../../assets/REDICTIONARY/PREPOSITION/sa kanila.gif";
+import tayo from "../../assets/REDICTIONARY/PREPOSITION/tayo.gif";
+import atin from "../../assets/REDICTIONARY/PREPOSITION/atin.gif";
+import kami from "../../assets/REDICTIONARY/PREPOSITION/kami.gif";
+import sa_akin from "../../assets/REDICTIONARY/PREPOSITION/sa akin.gif";
 // TIME
 import Alas_sais_ng_gabi from "../../assets/REDICTIONARY/TIME/Alas sais ng gabi.gif";
 import Alas_sais_ng_umaga from "../../assets/REDICTIONARY/TIME/Alas sais ng umaga.gif";
