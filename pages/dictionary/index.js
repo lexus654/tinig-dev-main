@@ -274,15 +274,6 @@ import Teacher from "../../assets/REDICTIONARY/OCCUPATIONS/Teacher.gif";
 import Guard from "../../assets/REDICTIONARY/OCCUPATIONS/Guard.gif";
 import Lawyer from "../../assets/REDICTIONARY/OCCUPATIONS/Lawyer.gif";
 
-// PRONOUNS
-// CHANGE PATH
-import sa_iyo from "../../assets/REDICTIONARY/PRONOUNS/sa iyo.gif";
-import sa_kanila from "../../assets/REDICTIONARY/PRONOUNS/sa kanila.gif";
-import tayo from "../../assets/REDICTIONARY/PRONOUNS/tayo.gif";
-import atin from "../../assets/REDICTIONARY/PRONOUNS/atin.gif";
-import kami from "../../assets/REDICTIONARY/PRONOUNS/kami.gif";
-import sa_akin from "../../assets/REDICTIONARY/PRONOUNS/sa akin.gif";
-
 // TERMINOLOGIES
 import Attention from "../../assets/REDICTIONARY/TERMINOLOGIES/Attention.gif";
 import Barangay_Captain from "../../assets/REDICTIONARY/TERMINOLOGIES/Barangay Captain.gif";
@@ -322,6 +313,14 @@ import Wait from "../../assets/REDICTIONARY/TERMINOLOGIES/Wait.gif";
 import Write from "../../assets/REDICTIONARY/TERMINOLOGIES/Write.gif";
 import Abuse from "../../assets/REDICTIONARY/TERMINOLOGIES/Abuse.gif";
 
+// PRONOUNS
+// CHANGE PATH
+import sa_iyo from "../../assets/REDICTIONARY/PRONOUNS/sa iyo.gif";
+import sa_kanila from "../../assets/REDICTIONARY/PRONOUNS/sa kanila.gif";
+import tayo from "../../assets/REDICTIONARY/PRONOUNS/tayo.gif";
+import atin from "../../assets/REDICTIONARY/PRONOUNS/atin.gif";
+import kami from "../../assets/REDICTIONARY/PRONOUNS/kami.gif";
+import sa_akin from "../../assets/REDICTIONARY/PRONOUNS/sa akin.gif";
 // TIME
 import Alas_sais_ng_gabi from "../../assets/REDICTIONARY/TIME/Alas sais ng gabi.gif";
 import Alas_sais_ng_umaga from "../../assets/REDICTIONARY/TIME/Alas sais ng umaga.gif";
