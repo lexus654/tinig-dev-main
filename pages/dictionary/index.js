@@ -307,6 +307,7 @@ import Staff from "../../assets/REDICTIONARY/TERMINOLOGIES/Staff.gif";
 import Stand from "../../assets/REDICTIONARY/TERMINOLOGIES/Stand.gif";
 import Talk_to_me from "../../assets/REDICTIONARY/TERMINOLOGIES/Talk to me.gif";
 import Vice_Mayor from "../../assets/REDICTIONARY/TERMINOLOGIES/Vice Mayor.gif";
+
 import Vice_President from "../../assets/REDICTIONARY/TERMINOLOGIES/Vice President.gif";
 import Visit from "../../assets/REDICTIONARY/TERMINOLOGIES/Visit.gif";
 import Wait from "../../assets/REDICTIONARY/TERMINOLOGIES/Wait.gif";
