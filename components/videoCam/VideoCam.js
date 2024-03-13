@@ -3,7 +3,6 @@ import Webcam from "react-webcam";
 import style from "./video.module.css";
 
 function VideoCam(props) {
-  console.log("test hakdog");
   const [getPrediction, setPrediction] = useState([]);
   const [wordPredicted, setWord] = useState("");
   const [counter, setCounter] = useState(1);
@@ -129,7 +128,7 @@ function VideoCam(props) {
           setPrediction(predictions);
 
           setCounter((prevCounter) => prevCounter + 1);
-        }, 500);
+        }, 800);
 
         // Save the intervalId to a ref to access it in cleanup
         intervalIdRef.current = intervalId;

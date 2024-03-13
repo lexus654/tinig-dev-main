@@ -209,7 +209,7 @@ function App(props) {
                 data-apikey="rf_yRT4Z51EDybxTNiVqpfNdYwz5dC2"
                 data-modelkey="alphabet_all"
               >
-                alphabet_all/1 (v3)(YOLOv8)
+                alphabet_all/1 (v1)(YOLOv8)
               </option>
               <option
                 className={style.optionModel}
@@ -221,11 +221,69 @@ function App(props) {
               </option>
               <option
                 className={style.optionModel}
+                value="7"
+                data-apikey="rf_yRT4Z51EDybxTNiVqpfNdYwz5dC2"
+                data-modelkey="alphabet_all"
+              >
+                alphabet_all/7 (v7)(YOLOv8)
+              </option>
+              <option
+                className={style.optionModel}
+                value="8"
+                data-apikey="rf_yRT4Z51EDybxTNiVqpfNdYwz5dC2"
+                data-modelkey="alphabet_all"
+              >
+                alphabet_all/8 (v8)(YOLOv8)
+              </option>
+              <option
+                className={style.optionModel}
+                value="9"
+                data-apikey="rf_yRT4Z51EDybxTNiVqpfNdYwz5dC2"
+                data-modelkey="alphabet_all"
+              >
+                alphabet_all/9 (v9)(YOLOv8)
+              </option>
+
+              <option
+                className={style.optionModel}
                 value="1"
                 data-apikey="rf_OoDSh3cVfzWaqk0bcLjG9mWnAEl1"
                 data-modelkey="hand-sign-yhknu"
               >
                 hand-sign-yhknu/1 (v1)(YOLOv5)
+              </option>
+              {/* final */}
+              <option
+                className={style.optionModel}
+                value="2"
+                data-apikey="rf_kr4GJNShBEaat59ZkwrtJremh2n1"
+                data-modelkey="tinigsinglefinal"
+              >
+                tinigsinglefinal/2 (roboflow)
+              </option>
+              <option
+                className={style.optionModel}
+                value="3"
+                data-apikey="rf_kr4GJNShBEaat59ZkwrtJremh2n1"
+                data-modelkey="tinigsinglefinal"
+              >
+                tinigsinglefinal/3 (YOLOv5)
+              </option>
+              <option
+                className={style.optionModel}
+                value="4"
+                data-apikey="rf_kr4GJNShBEaat59ZkwrtJremh2n1"
+                data-modelkey="tinigsinglefinal"
+              >
+                tinigsinglefinal/4 (YOLOv8)
+              </option>
+              <option
+                className={style.optionModel}
+                value="5"
+                data-apikey="rf_kr4GJNShBEaat59ZkwrtJremh2n1"
+                data-modelkey="tinigsinglefinal"
+              >
+                tinigsinglefinal/5 (YOLO NAS)
               </option>
             </select>
             <select

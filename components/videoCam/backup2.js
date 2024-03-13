@@ -1,5 +1,3 @@
-//  note backup na may responsiveness Jan 9 2023, Go to Backup 1 for the december code
-
 import React, { useEffect, useState, useRef } from "react";
 import Webcam from "react-webcam";
 import style from "./video.module.css";
@@ -12,8 +10,12 @@ function VideoCam(props) {
   const intervalIdRef = useRef(null);
   const [arrWords, setArrWords] = useState([]);
 
+  const [publishableKey, setPublishableKey] = useState(
+    "rf_Im2zzGX4QmStLH7TNlG3WXNnYlO2"
+  );
+
   const predictWord = (word) => {
-    props.setPredictedWord(arrWords);
+    props.setPredictedWord(word);
   };
 
   const videoRef = useRef(null);
@@ -81,57 +83,72 @@ function VideoCam(props) {
     }
   };
 
-  useEffect(() => {
-    const initWebcam = async () => {
-      try {
-        // Clear the existing interval when the model changes
-        if (intervalIdRef.current) {
-          clearInterval(intervalIdRef.current);
-          setCounter(1); // Reset the counter
-        }
+  const initWebcam = async () => {
+    try {
+      // Clear the existing interval when the model changes
+      if (intervalIdRef.current) {
+        clearInterval(intervalIdRef.current);
+        setCounter(1); // Reset the counter
+      }
 
-        const userMedia = await navigator.mediaDevices.getUserMedia({
-          video: {
-            frameRate: 60,
-          },
-        });
+      // Clear the existing model and tracks
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = videoRef.current.srcObject.getTracks();
+        tracks.forEach((track) => track.stop());
+        videoRef.current.srcObject = null;
+      }
 
-        if (videoRef.current) {
-          videoRef.current.srcObject = userMedia;
+      const userMedia = await navigator.mediaDevices.getUserMedia({
+        video: {
+          frameRate: 60,
+        },
+      });
 
-          const model = await roboflow
-            .auth({
-              publishable_key: publishableKey,
-            })
-            .load({
-              model: modelKey,
-              version: props.model,
-            });
-          model.configure({
-            threshold: 0.4,
+      if (videoRef.current) {
+        videoRef.current.srcObject = userMedia;
+
+        // Auth and load the new model
+        const model = await roboflow
+          .auth({
+            publishable_key: props.apikey,
+          })
+          .load({
+            model: props.modelkey,
+            version: props.model,
           });
 
-          const intervalId = setInterval(async () => {
-            const videoElement = videoRef.current.video;
-            const predictions = await model.detect(videoElement);
-            setPrediction(predictions);
+        model.configure({
+          threshold: props.threshold,
+        });
 
-            setCounter((prevCounter) => prevCounter + 1);
-          }, 2000);
+        // Set up the new interval
+        const intervalId = setInterval(async () => {
+          const videoElement = videoRef.current.video;
+          const predictions = await model.detect(videoElement);
+          setPrediction(predictions);
 
-          // Save the intervalId to a ref to access it in cleanup
-          intervalIdRef.current = intervalId;
+          setCounter((prevCounter) => prevCounter + 1);
+        }, 2000);
 
-          // Cleanup function to clear the interval when the component unmounts
-          return () => clearInterval(intervalId);
-        }
-      } catch (error) {
-        console.error("Error accessing webcam:", error);
+        // Save the intervalId to a ref to access it in cleanup
+        intervalIdRef.current = intervalId;
+
+        // Cleanup function to clear the interval when the component unmounts
+        return () => {
+          clearInterval(intervalId);
+          const tracks = userMedia.getTracks();
+          tracks.forEach((track) => track.stop());
+          videoRef.current.srcObject = null;
+        };
       }
-    };
+    } catch (error) {
+      console.error("Error accessing webcam:", error);
+    }
+  };
 
+  useEffect(() => {
     initWebcam();
-  }, [props.model]);
+  }, [props.model, props.modelkey, props.apikey, props.threshold]);
 
   useEffect(() => {
     // Call the function to draw bounding boxes whenever predictions change
@@ -141,25 +158,28 @@ function VideoCam(props) {
     console.log("getPrediction has changed:", getPrediction);
 
     if (getPrediction.length === 0) {
-      console.log("no word found");
+      // console.log("no word found");
     } else {
-      // Update arrWords using the previous state
-      setArrWords((prevArr) => [...prevArr, getPrediction[0].class]);
+      if (getPrediction[0].class == "-") {
+        predictWord(" ");
+      } else if (getPrediction[0].class == "backspace") {
+        predictWord("*");
+      } else {
+        // Update arrWords using the previous state
+        // setArrWords((prevArr) => [...prevArr, getPrediction[0].class]);
+        predictWord(getPrediction[0].class);
+      }
     }
 
     return () => {
       const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      ctx.clearRect(0, 0, canvasOptions.width, canvasOptions.height);
+      // Check if canvasRef.current is truthy before accessing getContext
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvasOptions.width, canvasOptions.height);
+      }
     };
   }, [getPrediction]);
-
-  useEffect(() => {
-    // Update wordPredicted whenever arrWords changes
-    setWord([...new Set(arrWords)]);
-    console.log(arrWords);
-    predictWord(arrWords);
-  }, [arrWords]);
 
   useEffect(() => {
     updateDimensions();
