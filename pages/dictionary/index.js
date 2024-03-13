@@ -275,6 +275,7 @@ import Guard from "../../assets/REDICTIONARY/OCCUPATIONS/Guard.gif";
 import Lawyer from "../../assets/REDICTIONARY/OCCUPATIONS/Lawyer.gif";
 
 // PRONOUNS
+// CHANGE PATH
 import sa_iyo from "../../assets/REDICTIONARY/PRONOUNS/sa iyo.gif";
 import sa_kanila from "../../assets/REDICTIONARY/PRONOUNS/sa kanila.gif";
 import tayo from "../../assets/REDICTIONARY/PRONOUNS/tayo.gif";
