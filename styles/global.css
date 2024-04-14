@@ -23,7 +23,7 @@ a {
       rgba(78, 146, 170, 0.5),
       rgba(60, 104, 121, 0.5)
     ),
-    url("../assets/background.webp");
+    url("../public/background.webp");
   background-size: cover;
 
   background-position: center;

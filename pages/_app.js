@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Header from "@/components/header/Header";
 import Script from "next/script";
 import Head from "next/head";
+import bgImage from "../assets/background.webp";
 
 export default function App({ Component, pageProps }) {
   return (
