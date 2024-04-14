@@ -418,9 +418,42 @@ import Sino from "../../assets/REDICTIONARY/QUESTIONS/sino.gif";
 import Alin from "../../assets/REDICTIONARY/QUESTIONS/alin.gif";
 import Ano from "../../assets/REDICTIONARY/QUESTIONS/ano.gif";
 
+// MISSING
+import KO from "../../assets/REDICTIONARY/MISSING/KO.png";
+import KUYA from "../../assets/REDICTIONARY/MISSING/KUYA.png";
+import KYUT from "../../assets/REDICTIONARY/MISSING/KYUT.png";
+import LARO from "../../assets/REDICTIONARY/MISSING/LARO.png";
+import MABAIT from "../../assets/REDICTIONARY/MISSING/MABAIT.png";
+import MALAMBOT from "../../assets/REDICTIONARY/MISSING/MALAMBOT.png";
+import MATAMIS from "../../assets/REDICTIONARY/MISSING/MATAMIS.png";
+import MATIGAS from "../../assets/REDICTIONARY/MISSING/MATIGAS.png";
+import TATAY from "../../assets/REDICTIONARY/MISSING/TATAY.png";
+import NANAY from "../../assets/REDICTIONARY/MISSING/NANAY.png";
+import NARS from "../../assets/REDICTIONARY/MISSING/NARS.png";
+import NGAYON from "../../assets/REDICTIONARY/MISSING/NGAYON.png";
+import NO from "../../assets/REDICTIONARY/MISSING/NO.png";
+import PINSAN from "../../assets/REDICTIONARY/MISSING/PINSAN.png";
+import PULIS from "../../assets/REDICTIONARY/MISSING/PULIS.png";
+import SIGAW from "../../assets/REDICTIONARY/MISSING/SIGAW.png";
+import TAHIMIK from "../../assets/REDICTIONARY/MISSING/TAHIMIK.png";
+import THANKYOU from "../../assets/REDICTIONARY/MISSING/THANK YOU.png";
+import TUBERO from "../../assets/REDICTIONARY/MISSING/TUBERO.png";
+import WEYTER from "../../assets/REDICTIONARY/MISSING/WEYTER.png";
+import YES from "../../assets/REDICTIONARY/MISSING/YES.png";
+import ARAL from "../../assets/REDICTIONARY/MISSING/ARAL.png";
+import ATE from "../../assets/REDICTIONARY/MISSING/ATE.png";
+import BASA from "../../assets/REDICTIONARY/MISSING/BASA.png";
+import DUKTOR from "../../assets/REDICTIONARY/MISSING/DUKTOR.png";
+import HELLO from "../../assets/REDICTIONARY/MISSING/HELLO.png";
+import HINTO from "../../assets/REDICTIONARY/MISSING/HINTO.png";
+import ILOVEYOU from "../../assets/REDICTIONARY/MISSING/I LOVE YOU.png";
+import IKAW from "../../assets/REDICTIONARY/MISSING/IKAW.png";
+import INOM from "../../assets/REDICTIONARY/MISSING/INOM.png";
+import KINIG from "../../assets/REDICTIONARY/MISSING/KINIG.png";
+
 import style from "./dictionary.module.css";
 import CardDictionary from "@/components/card/Card";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Dictionary(props) {
   // ARRAYS
@@ -854,6 +887,39 @@ function Dictionary(props) {
     { image: Alin, name: "ALIN" },
     { image: Ano, name: "ANO" },
   ];
+  const MISSING_array = [
+    { image: KO, name: "KO" },
+    { image: KUYA, name: "KUYA" },
+    { image: KYUT, name: "KYUT" },
+    { image: LARO, name: "LARO" },
+    { image: MABAIT, name: "MABAIT" },
+    { image: MALAMBOT, name: "MALAMBOT" },
+    { image: MATAMIS, name: "MATAMIS" },
+    { image: MATIGAS, name: "MATIGAS" },
+    { image: NANAY, name: "NANAY" },
+    { image: TATAY, name: "TATAY" },
+    { image: NARS, name: "NARS" },
+    { image: NGAYON, name: "NGAYON" },
+    { image: NO, name: "NO" },
+    { image: PINSAN, name: "PINSAN" },
+    { image: PULIS, name: "PULIS" },
+    { image: SIGAW, name: "SIGAW" },
+    { image: TAHIMIK, name: "TAHIMIK" },
+    { image: THANKYOU, name: "THANK YOU" },
+    { image: TUBERO, name: "TUBERO" },
+    { image: WEYTER, name: "WEYTER" },
+    { image: YES, name: "YES" },
+    { image: ARAL, name: "ARAL" },
+    { image: ATE, name: "ATE" },
+    { image: BASA, name: "BASA" },
+    { image: DUKTOR, name: "DUKTOR" },
+    { image: HELLO, name: "HELLO" },
+    { image: HINTO, name: "HINTO" },
+    { image: ILOVEYOU, name: "I LOVE YOU" },
+    { image: IKAW, name: "IKAW" },
+    { image: INOM, name: "INOM" },
+    { image: KINIG, name: "KINIG" },
+  ];
 
   const ARRAY_OF_WORDS = [
     ALPHABET_array,
@@ -875,7 +941,50 @@ function Dictionary(props) {
     VERBS_array,
     WEATHER_array,
     QUESTIONS_array,
+    MISSING_array,
   ];
+
+  const combinedArray = [
+    ...PRONOUNS_array,
+    ...TERMINOLOGIES_array,
+    ...HOME_array,
+    ...OCCUPATIONS_array,
+    ...TIME_array,
+    ...GREETINGS_array,
+    ...ALPHABET_array,
+    ...FAMILY_array,
+    ...FOODS_array,
+    ...COUNTING_array,
+    ...TOWN_array,
+    ...TRANSPORTATIONS_array,
+    ...SINGLE_array,
+    ...CALENDAR_array,
+    ...COLOR_array,
+    ...DAYS_array,
+    ...VERBS_array,
+    ...WEATHER_array,
+    ...QUESTIONS_array,
+    ...MISSING_array,
+  ];
+
+  const [transcript, setTranscript] = useState("");
+  const [gifArray, setGifArray] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+  const translateWord = () => {
+    const textSpeechDiv = inputValue;
+
+    if (textSpeechDiv) {
+      // Use either innerText or textContent to get the text content
+      const textInsideDiv =
+        textSpeechDiv.innerText || textSpeechDiv.textContent;
+      // Update the state with the text content
+      // setTranscript(textInsideDiv);
+      setGifArray(textSpeechDiv.split(" "));
+    }
+  };
 
   // Organize your arrays into a list for easier management
   const [visibleArrayIndex, setVisibleArrayIndex] = useState(null);
@@ -907,27 +1016,73 @@ function Dictionary(props) {
 
   return (
     <div className={style.bigContainer}>
-      {arrays.map((array, index) => (
-        <div className={style.buttonContainer} key={index}>
-          <button
-            className={style.buttonArrays}
-            onClick={() => toggleVisibility(index)}
-          >
-            Show {array.name}
+      {/* search */}
+
+      <div className={style.leftContainer}>
+        <div className={style.p}>Search for a word:</div>
+        <div>
+          <input
+            onChange={handleInputChange}
+            id="textSpeech2"
+            type="text"
+            placeholder="Type here to search..."
+            className={style.searchInput}
+          />
+          <button onClick={translateWord} className={style.buttonSearch}>
+            Search
           </button>
-          {visibleArrayIndex === index && (
-            <div className={style.displayContainer}>
-              {array.items.map((item, itemIndex) => (
-                <CardDictionary
-                  key={itemIndex}
-                  image={item.image}
-                  name={item.name}
-                />
-              ))}
-            </div>
-          )}
         </div>
-      ))}
+        {/* dISPLAY SEARCH RESULT HERE */}
+        <div className={style.gifHolder}>
+          {gifArray.map((letter, index) => {
+            const matchingItem = combinedArray.find(
+              (item) => item.name.toLowerCase() === letter.toLowerCase()
+            );
+            if (matchingItem) {
+              return (
+                <CardDictionary
+                  key={index}
+                  image={matchingItem.image}
+                  name={matchingItem.name}
+                />
+              );
+            }
+            return null; // Handle case where no match is found
+          })}
+        </div>
+      </div>
+      {/* Endsearch */}
+
+      <div className={style.rightContainer}>
+        <div className={style.p}>List of Categories</div>
+        <div className={style.categoryContainer}>
+          {arrays.map((array, index) => (
+            <div className={style.buttonContainer} key={index}>
+              <button
+                className={`${style.buttonArrays} ${
+                  visibleArrayIndex === index
+                    ? style.buttonRed
+                    : style.buttonBlue
+                }`}
+                onClick={() => toggleVisibility(index)}
+              >
+                Show {array.name}
+              </button>
+              {visibleArrayIndex === index && (
+                <div className={style.displayContainer}>
+                  {array.items.map((item, itemIndex) => (
+                    <CardDictionary
+                      key={itemIndex}
+                      image={item.image}
+                      name={item.name}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

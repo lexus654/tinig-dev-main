@@ -420,6 +420,39 @@ import Sino from "../../assets/REDICTIONARY/QUESTIONS/sino.gif";
 import Alin from "../../assets/REDICTIONARY/QUESTIONS/alin.gif";
 import Ano from "../../assets/REDICTIONARY/QUESTIONS/ano.gif";
 
+// MISSING
+import KO from "../../assets/REDICTIONARY/MISSING/KO.png";
+import KUYA from "../../assets/REDICTIONARY/MISSING/KUYA.png";
+import KYUT from "../../assets/REDICTIONARY/MISSING/KYUT.png";
+import LARO from "../../assets/REDICTIONARY/MISSING/LARO.png";
+import MABAIT from "../../assets/REDICTIONARY/MISSING/MABAIT.png";
+import MALAMBOT from "../../assets/REDICTIONARY/MISSING/MALAMBOT.png";
+import MATAMIS from "../../assets/REDICTIONARY/MISSING/MATAMIS.png";
+import MATIGAS from "../../assets/REDICTIONARY/MISSING/MATIGAS.png";
+import NANAY from "../../assets/REDICTIONARY/MISSING/NANAY.png";
+import TATAY from "../../assets/REDICTIONARY/MISSING/TATAY.png";
+import NARS from "../../assets/REDICTIONARY/MISSING/NARS.png";
+import NGAYON from "../../assets/REDICTIONARY/MISSING/NGAYON.png";
+import NO from "../../assets/REDICTIONARY/MISSING/NO.png";
+import PINSAN from "../../assets/REDICTIONARY/MISSING/PINSAN.png";
+import PULIS from "../../assets/REDICTIONARY/MISSING/PULIS.png";
+import SIGAW from "../../assets/REDICTIONARY/MISSING/SIGAW.png";
+import TAHIMIK from "../../assets/REDICTIONARY/MISSING/TAHIMIK.png";
+import THANKYOU from "../../assets/REDICTIONARY/MISSING/THANK YOU.png";
+import TUBERO from "../../assets/REDICTIONARY/MISSING/TUBERO.png";
+import WEYTER from "../../assets/REDICTIONARY/MISSING/WEYTER.png";
+import YES from "../../assets/REDICTIONARY/MISSING/YES.png";
+import ARAL from "../../assets/REDICTIONARY/MISSING/ARAL.png";
+import ATE from "../../assets/REDICTIONARY/MISSING/ATE.png";
+import BASA from "../../assets/REDICTIONARY/MISSING/BASA.png";
+import DUKTOR from "../../assets/REDICTIONARY/MISSING/DUKTOR.png";
+import HELLO from "../../assets/REDICTIONARY/MISSING/HELLO.png";
+import HINTO from "../../assets/REDICTIONARY/MISSING/HINTO.png";
+import ILOVEYOU from "../../assets/REDICTIONARY/MISSING/I LOVE YOU.png";
+import IKAW from "../../assets/REDICTIONARY/MISSING/IKAW.png";
+import INOM from "../../assets/REDICTIONARY/MISSING/INOM.png";
+import KINIG from "../../assets/REDICTIONARY/MISSING/KINIG.png";
+
 import style from "./speech.module.css";
 const SpeechToText = (props) => {
   const [isListening, setIsListening] = useState(false);
@@ -473,6 +506,39 @@ const SpeechToText = (props) => {
     { image: Wait, name: "WAIT" },
     { image: Write, name: "WRITE" },
     { image: Abuse, name: "ABUSE" },
+  ];
+  const MISSING_array = [
+    { image: KO, name: "KO" },
+    { image: KUYA, name: "KUYA" },
+    { image: KYUT, name: "KYUT" },
+    { image: LARO, name: "LARO" },
+    { image: MABAIT, name: "MABAIT" },
+    { image: MALAMBOT, name: "MALAMBOT" },
+    { image: MATAMIS, name: "MATAMIS" },
+    { image: MATIGAS, name: "MATIGAS" },
+    { image: NANAY, name: "NANAY" },
+    { image: TATAY, name: "TATAY" },
+    { image: NARS, name: "NARS" },
+    { image: NGAYON, name: "NGAYON" },
+    { image: NO, name: "NO" },
+    { image: PINSAN, name: "PINSAN" },
+    { image: PULIS, name: "PULIS" },
+    { image: SIGAW, name: "SIGAW" },
+    { image: TAHIMIK, name: "TAHIMIK" },
+    { image: THANKYOU, name: "THANK YOU" },
+    { image: TUBERO, name: "TUBERO" },
+    { image: WEYTER, name: "WEYTER" },
+    { image: YES, name: "YES" },
+    { image: ARAL, name: "ARAL" },
+    { image: ATE, name: "ATE" },
+    { image: BASA, name: "BASA" },
+    { image: DUKTOR, name: "DUKTOR" },
+    { image: HELLO, name: "HELLO" },
+    { image: HINTO, name: "HINTO" },
+    { image: ILOVEYOU, name: "I LOVE YOU" },
+    { image: IKAW, name: "IKAW" },
+    { image: INOM, name: "INOM" },
+    { image: KINIG, name: "KINIG" },
   ];
   const HOME_array = [
     { image: vacant_room, name: "VACANT ROOM" },
@@ -877,6 +943,7 @@ const SpeechToText = (props) => {
     ...VERBS_array,
     ...WEATHER_array,
     ...QUESTIONS_array,
+    ...MISSING_array,
   ];
 
   useEffect(() => {
@@ -944,7 +1011,6 @@ const SpeechToText = (props) => {
       // Update the state with the text content
       setTranscript(textInsideDiv);
       setGifArray(textInsideDiv.split(" "));
-      console.log(gifArray);
     }
   };
 

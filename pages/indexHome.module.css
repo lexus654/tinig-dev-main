@@ -42,6 +42,10 @@
   margin: 20px 0;
   color: #000000;
 }
+.button {
+  border: transparent solid 1px;
+  background-color: transparent;
+}
 
 .button .link {
   background: #403fff;

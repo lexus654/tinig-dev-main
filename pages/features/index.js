@@ -5,6 +5,9 @@ import clock from "../../assets/clock.png";
 import baybayin from "../../assets/baybayin.png";
 import { Imag } from "@tensorflow/tfjs";
 import style from "./features.module.css";
+import Bihasa from "@/components/instructions/Bihasa";
+import Dikta from "@/components/instructions/Dikta";
+import Signayo from "@/components/instructions/Signayo";
 
 function Features() {
   return (

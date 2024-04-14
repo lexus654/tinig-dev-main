@@ -64,6 +64,9 @@
   border-color: transparent;
   color: #ffffff;
 }
+.btnContaier button {
+  border-color: transparent;
+}
 .btnContaier {
   padding: 20px;
 }

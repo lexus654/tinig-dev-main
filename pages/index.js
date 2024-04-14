@@ -74,7 +74,8 @@ function HomePage() {
           </div>
         </div>
         {/* end */}
-        <div className={style.featureBox}>
+        {/* disable signayo */}
+        {/* <div className={style.featureBox}>
           <div className={style.imageBox}>
             <Image
               src={feat3}
@@ -89,7 +90,7 @@ function HomePage() {
           <div className={style.instructBox}>
             <button onClick={showSignayo}>How to Use?</button>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* inside container */}
       <div className={style.insideContainer}>

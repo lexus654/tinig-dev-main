@@ -112,14 +112,17 @@ function Header() {
         </Link>
         <ul className={styles.HeaderNav}>
           <li className={styles.HeaderNavLinks}>
+            <Link href="/">Home</Link>
+          </li>
+          <li className={styles.HeaderNavLinks}>
             <p onClick={showBihasa}>FSL to Speech</p>
           </li>
           <li className={styles.HeaderNavLinks}>
             <p onClick={showDikta}>Speech to FSL</p>
           </li>
-          <li className={styles.HeaderNavLinks}>
+          {/* <li className={styles.HeaderNavLinks}>
             <p onClick={showSignayo}>Movie Clips</p>
-          </li>
+          </li> */}
           <li className={styles.HeaderNavLinks}>
             <Link href="/dictionary">Dictionary</Link>
           </li>

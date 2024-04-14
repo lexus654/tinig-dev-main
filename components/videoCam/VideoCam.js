@@ -20,14 +20,14 @@ function VideoCam(props) {
 
   const videoRef = useRef(null);
   const [canvasOptions, setCanvasOptions] = useState({
-    width: 620,
-    height: 480,
+    width: 640,
+    height: 500,
   });
 
   const [webcamOptions, setWebcamOptions] = useState({
-    width: 620,
-    height: 480,
-    mirrored: true,
+    width: 640,
+    height: 500,
+    mirrored: false,
   });
   const [canvaPosition, setcanvaPosition] = useState({
     top: "150px",
@@ -50,7 +50,7 @@ function VideoCam(props) {
       setWebcamOptions({
         width: 440,
         height: 300,
-        mirrored: true,
+        mirrored: false,
       });
     } else if (windowWidth <= 500) {
       setCanvasOptions({
@@ -64,7 +64,7 @@ function VideoCam(props) {
       setWebcamOptions({
         width: 300,
         height: 160,
-        mirrored: true,
+        mirrored: false,
       });
     } else {
       setCanvasOptions({
@@ -78,7 +78,7 @@ function VideoCam(props) {
       setWebcamOptions({
         width: 620,
         height: 480,
-        mirrored: true,
+        mirrored: false,
       });
     }
   };

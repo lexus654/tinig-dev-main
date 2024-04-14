@@ -14,6 +14,9 @@ export default function App({ Component, pageProps }) {
           <Header></Header>
           <Component {...pageProps} />
         </div>
+        <div id="mobile-warning">
+          This website is not viewable on mobile devices.
+        </div>
       </div>
     </>
   );

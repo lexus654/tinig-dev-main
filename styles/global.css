@@ -4,7 +4,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+#mobile-warning {
+  display: none;
+}
 a {
   text-decoration: none;
 }
@@ -17,12 +19,39 @@ a {
 .wrapper {
   display: flex;
   justify-content: center;
-  background-color: #dce6ff;
+  background-image: linear-gradient(
+      rgba(78, 146, 170, 0.5),
+      rgba(60, 104, 121, 0.5)
+    ),
+    url("../assets/background.webp");
+  background-size: cover;
+
+  background-position: center;
   padding: 20px 100px;
   min-height: 100vh;
 }
 @media (max-width: 768px) {
   .BodyWrapper {
     justify-content: start;
+  }
+}
+
+@media (max-width: 600px) {
+  .BodyWrapper {
+    display: none;
+  }
+  #mobile-warning {
+    display: block !important; /* Make it visible */
+    position: fixed; /* Optional: Fixes the message on the screen */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    width: 80%; /* Set width */
+    padding: 20px; /* Add some padding */
+    text-align: center; /* Center the text inside the div */
+    background-color: #fff; /* Optional: Change background */
+    color: #000; /* Optional: Change text color */
+    border: 1px solid #000; /* Optional: Add border */
+    z-index: 1000; /* Make sure it's on top */
   }
 }

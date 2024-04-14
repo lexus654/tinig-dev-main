@@ -154,6 +154,7 @@ function App(props) {
 
       {/* delete first */}
       <div className={style.RightContainer}>
+        <div className={style.label}>CONTROL BOX</div>
         <div className={style.control}>
           {/* <p className={style.controlText}>Control Panel</p> */}
           <div className={style.controlInside}>
@@ -357,6 +358,8 @@ function App(props) {
           </div>
         </div>
 
+        {/* DISPLAY BOX */}
+        <div className={style.labelBox}>FILIPINO TEXT</div>
         <div className={style.textContainer}>
           {selectedPreviewURL && (
             <audio className={style.audio} key={audioKey} controls autoPlay>
@@ -365,6 +368,7 @@ function App(props) {
           )}
           {space ? arrWords.join(" ") : arrWords.join("")}
         </div>
+        <div className={style.labelBox}>BAYBAYIN TEXT</div>
         <div className={style.baybayinContainer}>
           {/* {Array.from(new Set(predictedWord)).join(" ")
             ? `${toBaybayin(
