@@ -454,7 +454,7 @@ import KINIG from "../../assets/REDICTIONARY/MISSING/KINIG.png";
 import style from "./dictionary.module.css";
 import CardDictionary from "@/components/card/Card";
 import React, { useState, useEffect } from "react";
-
+import { toBaybayin } from "filipino-script-translator";
 function Dictionary(props) {
   // ARRAYS
   const PRONOUNS_array = [
