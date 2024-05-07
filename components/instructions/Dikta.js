@@ -8,7 +8,7 @@ function Dikta({ isVisible, setIsVisible }) {
   const closeModal = () => {
     setIsVisible(false);
   };
-  const videoId = "fkAWkueKbcU";
+  const videoId = "DbBrnUsrkQE";
   const videoUrl = `https://www.youtube.com/embed/${videoId}`;
 
   return (

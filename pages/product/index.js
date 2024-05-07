@@ -376,8 +376,8 @@ function App(props) {
               ).toLowerCase()}`
             : ""} */}
           {space
-            ? `${toBaybayin(arrWords.join(" ")).toLowerCase()}`
-            : `${toBaybayin(arrWords.join("")).toLowerCase()}`}
+            ? `${toBaybayin(arrWords.join(" ").toLowerCase())}`
+            : `${toBaybayin(arrWords.join("").toLowerCase())}`}
         </div>
       </div>
     </div>

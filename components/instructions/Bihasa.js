@@ -8,7 +8,7 @@ function Bihasa({ isVisible, setIsVisible }) {
   const closeModal = () => {
     setIsVisible(false);
   };
-  const videoId = "jNtkXeOm0AM"; // Replace 'YOUR_VIDEO_ID' with the actual video ID
+  const videoId = "PF0mryOW3_I"; // Replace 'YOUR_VIDEO_ID' with the actual video ID
   const videoUrl = `https://www.youtube.com/embed/${videoId}`;
 
   return (
