@@ -125,19 +125,11 @@ function App(props) {
       selectModelKey(selectedOption.getAttribute("data-modelkey"));
     } else if (
       selectedOption.getAttribute("data-modelkey") === "alphabet_all" ||
-      selectedOption.getAttribute("data-modelkey") === "hand-sign-yhknu"
-    ) {
-      console.log(selectedOption.getAttribute("data-modelkey"));
-      setSpace(false);
-      selectModel(e.target.value);
-      selectApiKey(selectedOption.getAttribute("data-apikey"));
-      selectModelKey(selectedOption.getAttribute("data-modelkey"));
-    } else if (
-      selectedOption.getAttribute("data-modelkey") === "tinig-single" ||
+      selectedOption.getAttribute("data-modelkey") === "hand-sign-yhknu" ||
       selectedOption.getAttribute("data-modelkey") === "appreciate-alphabet"
     ) {
-      setSpace(false);
       console.log(selectedOption.getAttribute("data-modelkey"));
+      setSpace(false);
       selectModel(e.target.value);
       selectApiKey(selectedOption.getAttribute("data-apikey"));
       selectModelKey(selectedOption.getAttribute("data-modelkey"));
