@@ -132,6 +132,15 @@ function App(props) {
       selectModel(e.target.value);
       selectApiKey(selectedOption.getAttribute("data-apikey"));
       selectModelKey(selectedOption.getAttribute("data-modelkey"));
+    } else if (
+      selectedOption.getAttribute("data-modelkey") === "tinig-single" ||
+      selectedOption.getAttribute("data-modelkey") === "appreciate-alphabet"
+    ) {
+      setSpace(false);
+      console.log(selectedOption.getAttribute("data-modelkey"));
+      selectModel(e.target.value);
+      selectApiKey(selectedOption.getAttribute("data-apikey"));
+      selectModelKey(selectedOption.getAttribute("data-modelkey"));
     }
   };
   const handleSelectThreshold = (e) => {
@@ -253,8 +262,25 @@ function App(props) {
               >
                 hand-sign-yhknu/1 (v1)(YOLOv5)
               </option>
-              {/* final */}
+              {/* final models */}
               <option
+                className={style.optionModel}
+                value="10"
+                data-apikey="rf_OqiemtLXppAB27qqz44X"
+                data-modelkey="tinig-single"
+              >
+                Single V10
+              </option>
+              <option
+                className={style.optionModel}
+                value="7"
+                data-apikey="rf_VQTph0YRX7EUfazTRU18"
+                data-modelkey="appreciate-alphabet"
+              >
+                Alphabet V7
+              </option>
+              {/* final */}
+              {/* <option
                 className={style.optionModel}
                 value="2"
                 data-apikey="rf_kr4GJNShBEaat59ZkwrtJremh2n1"
@@ -285,7 +311,7 @@ function App(props) {
                 data-modelkey="tinigsinglefinal"
               >
                 tinigsinglefinal/5 (YOLO NAS)
-              </option>
+              </option> */}
             </select>
             <select
               onChange={handleSelectThreshold}
