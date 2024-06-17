@@ -1013,7 +1013,7 @@ const SpeechToText = (props) => {
       setGifArray(textInsideDiv.split(" "));
     }
   };
-
+  // edit
   return (
     <div>
       <button
